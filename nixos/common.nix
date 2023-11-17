@@ -54,7 +54,8 @@
 
   # TODO change
   users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMkKyMS0O7nzToTh/3LCrwJB++zc29R8U6UlzfzT0xV9 wexder@archlinux"
+    "ssh-rsa aaaab3nzac1yc2eaaaadaqabaaabgqcviittgyggbvlyugbazdviyvym38mkffjl7ynmhwnd5ydnosz12xcom/pnzxt3/rt5igryafes6alkx3epld9xfnbghg2jeqwpgk9cavsjes0wla9mgxvsblpwssjeyp5b8rhd0b8jdia6ciloydhndq2ulvb6c6oqythf2zg1ix+aclwjomq4tazdpspx8mnp1olxfrgufy2xmelfqxju7n+xv+lrhxkyahhuzrgtzq5cxfnwemwsmu5vxyo66oh8v4gogffxrjzqkvddpfpl7ioavkd+kzeq2loqwhzqfof210j5k+pppul0fzuonjlsbw/j+xuxmge0bza0ekxh1aujambzjopeyaaqldmx0ef8ovulipc2csfoqajoiqujushfcqlplowr09eq1zes3whs/i0rxlt0tibdrgsvppew07keral1avqlckmbozuvasacraeon4s4k6xcy0qcvba7pkserxoxchyqpkzprxpbbmagqoxkvzaez8drxlu= barney@barneylaptop"
+    "ssh-rsa aaaab3nzac1yc2eaaaadaqabaaabaqdr0py0dnvd/dkiphpxmav6hmg5xix7dkog4ztp3bqgsnmq8ebioedbwidxrigbuk69re1tvj+ivs60l8m58ftvjimdbux0r3jgrjnkcaiwmmtld3iyin/faqsk/seqgnj4r7ybt8rnlghzdrcf1ww76t3w6jlfdfer1lsays4wjxu4s8m3lci7r8bdwdp8aonmau3vlrwne7/ow/zqd7ohik4ia9f2zffvqa/ptwmaquytxn1slprsron+gk6g4lulj9bffft9qtscz8duycjqs5ua0f+ssjzrsprrdt+baiesg2zx2+hraja1y7/2nosuhwappk6e/k8fsb8rqbyd pavel@laptop-30gsn6dn"
   ];
 
   security.polkit.enable = true;
@@ -62,13 +63,13 @@
   users.mutableUsers = false;
   users.users.wexder = {
     isNormalUser = true;
-    home = "/home/wexder";
-    description = "wexder";
+    home = "/home/barney";
+    description = "barney";
     extraGroups = [ "wheel" ];
-    hashedPasswordFile = "/etc/passwordFile-wexder";
+    hashedPasswordFile = "/etc/passwordFile-barney";
     openssh.authorizedKeys.keys = [
-      # TODO change
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMkKyMS0O7nzToTh/3LCrwJB++zc29R8U6UlzfzT0xV9 wexder@archlinux"
+      "ssh-rsa aaaab3nzac1yc2eaaaadaqabaaabgqcviittgyggbvlyugbazdviyvym38mkffjl7ynmhwnd5ydnosz12xcom/pnzxt3/rt5igryafes6alkx3epld9xfnbghg2jeqwpgk9cavsjes0wla9mgxvsblpwssjeyp5b8rhd0b8jdia6ciloydhndq2ulvb6c6oqythf2zg1ix+aclwjomq4tazdpspx8mnp1olxfrgufy2xmelfqxju7n+xv+lrhxkyahhuzrgtzq5cxfnwemwsmu5vxyo66oh8v4gogffxrjzqkvddpfpl7ioavkd+kzeq2loqwhzqfof210j5k+pppul0fzuonjlsbw/j+xuxmge0bza0ekxh1aujambzjopeyaaqldmx0ef8ovulipc2csfoqajoiqujushfcqlplowr09eq1zes3whs/i0rxlt0tibdrgsvppew07keral1avqlckmbozuvasacraeon4s4k6xcy0qcvba7pkserxoxchyqpkzprxpbbmagqoxkvzaez8drxlu= barney@barneylaptop"
+      "ssh-rsa aaaab3nzac1yc2eaaaadaqabaaabaqdr0py0dnvd/dkiphpxmav6hmg5xix7dkog4ztp3bqgsnmq8ebioedbwidxrigbuk69re1tvj+ivs60l8m58ftvjimdbux0r3jgrjnkcaiwmmtld3iyin/faqsk/seqgnj4r7ybt8rnlghzdrcf1ww76t3w6jlfdfer1lsays4wjxu4s8m3lci7r8bdwdp8aonmau3vlrwne7/ow/zqd7ohik4ia9f2zffvqa/ptwmaquytxn1slprsron+gk6g4lulj9bffft9qtscz8duycjqs5ua0f+ssjzrsprrdt+baiesg2zx2+hraja1y7/2nosuhwappk6e/k8fsb8rqbyd pavel@laptop-30gsn6dn"
     ];
   };
   environment.shells = with pkgs; [ zsh ];

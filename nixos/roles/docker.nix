@@ -10,6 +10,6 @@ in
   config = lib.mkIf cfg.enable
     {
       virtualisation.docker.enable = true;
-      users.extraGroups.docker.members = [ "wexder" ];
+      users.extraGroups.docker.members = [ "barney" ];
     };
 }

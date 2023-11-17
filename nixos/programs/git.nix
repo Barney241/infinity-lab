@@ -2,7 +2,7 @@
 {
   programs.git = {
     enable = true;
-    userName = "Vladimir Zahradnik";
-    userEmail = "wexder19@gmail.com";
+    userName = "Pavel Adamek";
+    userEmail = "pavel.adamek241@gmail.com";
   };
 }

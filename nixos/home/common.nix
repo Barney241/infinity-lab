@@ -5,8 +5,8 @@
   programs.home-manager.enable = true;
 
   home.stateVersion = "23.11";
-  home.username = "wexder";
-  home.homeDirectory = "/home/wexder";
+  home.username = "barney";
+  home.homeDirectory = "/home/barney";
 
   imports = [
     ../programs/nvim.nix

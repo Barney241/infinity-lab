@@ -20,12 +20,12 @@
   };
 
   services.getty = {
-    autologinUser = "wexder";
+    autologinUser = "barney";
   };
 
   security.sudo.extraRules = [
     {
-      users = [ "wexder" ];
+      users = [ "barney" ];
       commands = [
         {
           command = "ALL";

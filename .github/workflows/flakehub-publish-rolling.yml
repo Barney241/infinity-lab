@@ -23,5 +23,5 @@ jobs:
       - uses: "DeterminateSystems/flakehub-push@main"
         with:
           visibility: "unlisted"
-          name: "wexder/snowy-lab"
+          name: "Barney241/infinity-lab"
           tag: "${{ inputs.tag }}"

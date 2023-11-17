@@ -3,7 +3,12 @@
   imports = [
     ../common.nix
   ];
-  networking.hostName = "snowball";
+  networking = {
+    hostName = "serveros";
+    firewall = {
+      enable = false;
+    };
+  };
 
   roles = {
     docker = {
@@ -12,10 +17,13 @@
     dev = {
       enable = true;
     };
-    desktop = {
+    xMinimalDesktop = {
       enable = true;
     };
     tailscale = {
+      enable = true;
+    };
+    jupyter = {
       enable = true;
     };
   };

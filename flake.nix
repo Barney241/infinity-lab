@@ -1,5 +1,5 @@
 {
-  description = "Input into the snowy lab";
+  description = "Input into the infinity lab";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";

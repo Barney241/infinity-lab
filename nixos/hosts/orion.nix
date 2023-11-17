@@ -3,12 +3,7 @@
   imports = [
     ../common.nix
   ];
-  networking = {
-    hostName = "polar-bear";
-    firewall = {
-      enable = false;
-    };
-  };
+  networking.hostName = "orion";
 
   roles = {
     docker = {
@@ -17,13 +12,10 @@
     dev = {
       enable = true;
     };
-    xMinimalDesktop = {
+    desktop = {
       enable = true;
     };
     tailscale = {
-      enable = true;
-    };
-    jupyter = {
       enable = true;
     };
   };

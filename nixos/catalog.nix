@@ -1,24 +1,17 @@
 # Catalog defines the systems & services on my network.
 { system }: {
   nodes = {
-    snowy-deck = {
-      config = ./hosts/snowyDeck.nix;
-      hw = ./hw/snowyDeck.nix;
-      home = ./home/snowyDeck.nix;
+    orion = {
+      config = ./hosts/orion.nix;
+      hw = ./hw/orion.nix;
+      home = ./home/orion.nix;
       system = system.x86_64-linux;
     };
 
-    snowball = {
-      config = ./hosts/snowball.nix;
-      hw = ./hw/snowball.nix;
-      home = ./home/snowball.nix;
-      system = system.x86_64-linux;
-    };
-
-    polar-bear = {
-      config = ./hosts/polarBear.nix;
-      hw = ./hw/polarBear.nix;
-      home = ./home/polarBear.nix;
+    serveros = {
+      config = ./hosts/serveros.nix;
+      hw = ./hw/serveros.nix;
+      home = ./home/serveros.nix;
       system = system.x86_64-linux;
     };
 

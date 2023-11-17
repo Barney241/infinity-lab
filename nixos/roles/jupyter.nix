@@ -10,13 +10,13 @@ in
   config = lib.mkIf cfg.enable
     {
 
-      users.groups.jupyter.members = [ "wexder" ];
+      users.groups.jupyter.members = [ "barney" ];
       users.groups.jupyter = { };
 
       services.jupyter = {
         enable = true;
         command = "jupyter-lab";
-        user = "wexder";
+        user = "barney";
         group = "jupyter";
         password = "1234";
         notebookDir = "~/development/jupyter";
