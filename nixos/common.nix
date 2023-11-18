@@ -61,7 +61,7 @@
   security.polkit.enable = true;
 
   users.mutableUsers = false;
-  users.users.wexder = {
+  users.users.barney = {
     isNormalUser = true;
     home = "/home/barney";
     description = "barney";
