@@ -45,7 +45,7 @@
                   {
                     home-manager.useGlobalPkgs = true;
                     home-manager.useUserPackages = true;
-                    home-manager.users.wexder = import node.home;
+                    home-manager.users.barney = import node.home;
                   }
                 ];
               })
@@ -79,7 +79,7 @@
                 {
                   home-manager.useGlobalPkgs = true;
                   home-manager.useUserPackages = true;
-                  home-manager.users.wexder = import node.home;
+                  home-manager.users.barney = import node.home;
                 }
                 ./nixos/hw/qemu.nix
               ];
