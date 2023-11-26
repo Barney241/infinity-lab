@@ -17,7 +17,7 @@
     dev = {
       enable = true;
     };
-    desktop = {
+    xMinimalDesktop = {
       enable = true;
     };
     tailscale = {
