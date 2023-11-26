@@ -5,13 +5,13 @@
     nixpkgs.url = "github:NixOS/nixpkgs";
 
     agenix.url = "github:ryantm/agenix";
-    # agenix.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-utils.url = "github:numtide/flake-utils";
-    # flake-utils.inputs.nixpkgs.follows = "nixpkgs";
+    flake-utils.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager.url = "github:nix-community/home-manager";
-    # home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, agenix, flake-utils, home-manager, ... }@attrs:
