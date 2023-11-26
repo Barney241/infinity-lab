@@ -1,7 +1,9 @@
 { lib, config, pkgs, modulesPath, ... }:
 {
   boot.loader.systemd-boot.enable = true;
-
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.useOSProber = true;
 
   imports =
     [
@@ -18,10 +20,10 @@
       device = "/dev/disk/by-label/sda1";
       fsType = "ext4";
     };
-    "/boot" = {
-      device = "/dev/disk/by-label/sr0";
-      fsType = "vfat";
-    };
+    # "/boot" = {
+    # device = "/dev/disk/by-label/sr0";
+    # fsType = "vfat";
+    # };
     # "/backup" = {
     # device = "/dev/disk/by-label/backup";
     # fsType = "ext4";
