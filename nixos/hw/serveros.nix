@@ -2,6 +2,7 @@
 {
   boot.loader.systemd-boot.enable = true;
 
+
   imports =
     [
       ./common.nix
@@ -16,6 +17,10 @@
     "/" = {
       device = "/dev/disk/by-label/sda1";
       fsType = "ext4";
+    };
+    "/boot" = {
+      device = "/dev/disk/by-label/sr0";
+      fsType = "vfat";
     };
     # "/backup" = {
     # device = "/dev/disk/by-label/backup";
