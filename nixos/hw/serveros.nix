@@ -14,13 +14,13 @@
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-label/nixos";
+      device = "/dev/disk/by-label/sda1";
       fsType = "ext4";
     };
-    "/backup" = {
-      device = "/dev/disk/by-label/backup";
-      fsType = "ext4";
-    };
+    # "/backup" = {
+    # device = "/dev/disk/by-label/backup";
+    # fsType = "ext4";
+    # };
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -34,5 +34,5 @@
 
   swapDevices = [{ device = "/swapfile"; size = 16382; }];
 
-  gpus.nvidia.enable = true;
+  # gpus.nvidia.enable = true;
 }

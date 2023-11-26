@@ -24,7 +24,7 @@
       enable = true;
     };
     jupyter = {
-      enable = true;
+      enable = false;
     };
   };
 }
