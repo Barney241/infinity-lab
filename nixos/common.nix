@@ -77,6 +77,9 @@
   users.users.root.shell = pkgs.zsh;
   programs.zsh.enable = true;
   systemd.oomd.enable = true;
+  systemd.extraConfig = ''
+    DefaultTimeoutStopSec=10s
+  '';
 
   # age.secrets = {
   #   influxdb-telegraf.file = ./secrets/influxdb-telegraf.age;

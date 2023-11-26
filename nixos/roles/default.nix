@@ -4,6 +4,7 @@
     ./dev.nix
     ./dns.nix
     ./docker.nix
+    ./gaming.nix
     ./jupyter.nix
     ./netclient.nix
     ./tailscale.nix

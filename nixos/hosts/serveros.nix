@@ -26,5 +26,8 @@
     jupyter = {
       enable = false;
     };
+    gaming = {
+      enable = true;
+    };
   };
 }
