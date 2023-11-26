@@ -18,7 +18,7 @@
       enable = true;
     };
     xMinimalDesktop = {
-      enable = true;
+      enable = false;
     };
     tailscale = {
       enable = true;

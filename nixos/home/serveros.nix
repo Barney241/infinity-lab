@@ -7,5 +7,6 @@
     ../programs/git.nix
     ../programs/firefox.nix
     ../programs/alacritty.nix
+    ../programs/hyprland.nix
   ];
 }
