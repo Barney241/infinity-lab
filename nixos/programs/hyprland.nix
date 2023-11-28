@@ -17,5 +17,8 @@
     libsForQt5.kdeconnect-kde
     wdisplays
     waypipe
+
+    hyprpicker
+    hyphen
   ];
 }
