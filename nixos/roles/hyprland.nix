@@ -18,7 +18,6 @@ in
       };
 
       programs.hyprland.xwayland = {
-        hidpi = true;
         enable = true;
       };
     };
