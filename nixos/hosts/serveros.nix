@@ -29,5 +29,8 @@
     gaming = {
       enable = true;
     };
+    hyprland = {
+      enable = true;
+    };
   };
 }

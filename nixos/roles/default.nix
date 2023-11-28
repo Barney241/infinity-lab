@@ -9,5 +9,6 @@
     ./netclient.nix
     ./tailscale.nix
     ./xMinimalDesktop.nix
+    ./hyprland.nix
   ];
 }

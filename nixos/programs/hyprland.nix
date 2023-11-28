@@ -19,14 +19,6 @@
     waypipe
     hyprland
     xdg-desktop-portal-hyprland
+    hyprnome
   ];
-
-  programs.hyprland = {
-    enable = true;
-  };
-
-  programs.hyprland.xwayland = {
-    hidpi = true;
-    enable = true;
-  };
 }
