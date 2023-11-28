@@ -25,11 +25,6 @@ in
 
       services.xserver = {
         enable = true;
-        excludePackages = [ pkgs.xterm ];
-      };
-
-      services.xserver = {
-        enable = true;
 
         desktopManager = {
           plasma5.enable = true;
