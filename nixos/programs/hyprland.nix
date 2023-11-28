@@ -17,8 +17,5 @@
     libsForQt5.kdeconnect-kde
     wdisplays
     waypipe
-    hyprland
-    xdg-desktop-portal-hyprland
-    hyprnome
   ];
 }

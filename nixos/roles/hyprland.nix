@@ -13,41 +13,28 @@ in
 
   config = lib.mkIf cfg.enable
     {
-      i18n.inputMethod.enabled = "fcitx5";
-      i18n.inputMethod.fcitx5.addons = [ pkgs.fcitx5-mozc ];
+      services.xserver.enable = true;
+      services.xserver.desktopManager.plasma5.enable = true;
 
-      security.pam.services.swaylock = { };
-
-      services.udisks2 = {
+      environment.systemPackages = with pkgs; [
+        greetd.tuigreet
+      ];
+      services.greetd = {
         enable = true;
-        mountOnMedia = true;
+        settings = {
+          default_session.command = ''
+            ${pkgs.greetd.tuigreet}/bin/tuigreet \
+              --time \
+              --asterisks \
+              --user-menu \
+              --cmd Hyprland
+          '';
+        };
       };
-
-      services.xserver = {
+      programs.hyprland = {
         enable = true;
-
-        desktopManager = {
-          plasma5.enable = true;
-        };
-
-        displayManager = {
-          sddm.enable = true;
-
-          autoLogin = {
-            enable = true;
-            user = "barney";
-          };
-        };
-
-        excludePackages = [ pkgs.xterm ];
+        package = inputs.hyprland.packages.${pkgs.system}.hyprland;
       };
-
-      systemd.services = {
-        "getty@tty1".enable = false;
-        "autovt@tty1".enable = false;
-      };
-
-      programs.hyprland.enable = true;
     };
 }
 
