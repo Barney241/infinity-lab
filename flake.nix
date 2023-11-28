@@ -16,7 +16,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, agenix, flake-utils, home-manager, ... }@attrs:
+  outputs = { self, nixpkgs, agenix, flake-utils, home-manager, hyprland, ... }@attrs:
     let
       inherit (nixpkgs.lib)
         mapAttrs mapAttrs' nixosSystem;

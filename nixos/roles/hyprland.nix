@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, lib, ... }:
+{ hyprland, config, pkgs, lib, ... }:
 let
   cfg = config.roles.hyprland;
 in
@@ -30,7 +30,7 @@ in
       };
       programs.hyprland = {
         enable = true;
-        package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+        package = hyprland.packages.${pkgs.system}.hyprland;
       };
     };
 }
