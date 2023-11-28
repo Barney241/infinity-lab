@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ inputs, config, pkgs, lib, ... }:
 let
   cfg = config.roles.hyprland;
 in
@@ -13,9 +13,6 @@ in
 
   config = lib.mkIf cfg.enable
     {
-      services.xserver.enable = true;
-      services.xserver.desktopManager.plasma5.enable = true;
-
       environment.systemPackages = with pkgs; [
         greetd.tuigreet
       ];
