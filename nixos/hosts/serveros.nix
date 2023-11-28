@@ -18,7 +18,7 @@
       enable = true;
     };
     xMinimalDesktop = {
-      enable = false;
+      enable = true;
     };
     tailscale = {
       enable = true;
@@ -30,7 +30,7 @@
       enable = true;
     };
     hyprland = {
-      enable = true;
+      enable = false;
     };
   };
 }
