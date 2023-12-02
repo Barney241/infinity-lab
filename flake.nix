@@ -51,6 +51,11 @@
                     home-manager.useUserPackages = true;
                     home-manager.users.barney = import node.home;
                   }
+
+                  vscode-server.nixosModules.default
+                  ({ config, pkgs, ... }: {
+                    services.vscode-server.enable = true;
+                  })
                 ];
               })
             catalog.nodes;
