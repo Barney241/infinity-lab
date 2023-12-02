@@ -14,9 +14,11 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland.url = "github:hyprwm/Hyprland";
+
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
-  outputs = { self, nixpkgs, agenix, flake-utils, home-manager, hyprland, ... }@attrs:
+  outputs = { self, nixpkgs, agenix, flake-utils, home-manager, hyprland, vscode-server, ... }@attrs:
     let
       inherit (nixpkgs.lib)
         mapAttrs mapAttrs' nixosSystem;

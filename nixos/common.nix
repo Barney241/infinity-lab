@@ -26,7 +26,7 @@
     htop
     jq
     # neovim
-    neovim-unwrapped
+    # neovim-unwrapped
     tree
     wget
     curl
@@ -35,6 +35,7 @@
     gcc
     unzip
     ripgrep
+    mdadm
   ];
 
   environment.sessionVariables = {

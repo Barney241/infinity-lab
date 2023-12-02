@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, vscode-server, ... }:
 let
   cfg = config.roles.dev;
 in
@@ -31,6 +31,11 @@ in
         nix-direnv = {
           enable = true;
         };
+      };
+
+      services.vscode-server = {
+        enable = true;
+        package = vscode-server.packages.${pkgs.system}.vscode-server;
       };
     };
 }
