@@ -26,8 +26,8 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = hostName;
-  networking.networkmanager.enable = lib.mkDefault true;
-  services.resolved.enable = true;
+  # networking.networkmanager.enable = lib.mkDefault true;
+  # services.resolved.enable = true;
 
   environment.systemPackages = with pkgs;[
     iwd
