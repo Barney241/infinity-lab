@@ -31,12 +31,12 @@
     #   eval "$(starship init zsh)"
     # '';
 
-    ohMyZsh = {
+    oh-my-zsh = {
       enable = true;
 
       theme = "spaceship";
 
-      customPkgs = [
+      custom-pkgs = [
         pkgs.spaceship-prompt
         # and even more...
       ];
