@@ -46,7 +46,6 @@
         "tmux"
         "docker"
         "kubectl"
-        "spaceship"
         # "ssh-agent"
       ];
     };
@@ -60,6 +59,16 @@
           sha256 = "0zmq66dzasmr5pwribyh4kbkk23jxbpdw4rjxx0i7dx8jjp2lzl4";
         };
         file = "zsh-syntax-highlighting.zsh";
+      }
+      {
+        name = "zsh-spaceship-prompt";
+        src = fetchFromGitHub {
+          owner = "spaceship-prompt";
+          repo = "spaceship-prompt";
+          rev = "v4.15.0";
+          sha256 = nixpkgs.lib.fakeSha256;
+        };
+        file = "spaceship.zsh-theme";
       }
       {
         name = "zsh-nix-shell";
