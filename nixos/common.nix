@@ -37,7 +37,7 @@
     htop
     jq
     # neovim
-    neovim-unwrapped
+    # neovim-unwrapped
     tree
     wget
     curl
