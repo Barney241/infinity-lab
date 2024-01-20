@@ -50,7 +50,6 @@
                     home-manager.useGlobalPkgs = true;
                     home-manager.useUserPackages = true;
                     home-manager.users.barney = import node.home;
-                    home-manager.users.root = import node.home;
                   }
 
                   vscode-server.nixosModules.default
@@ -90,7 +89,6 @@
                   home-manager.useGlobalPkgs = true;
                   home-manager.useUserPackages = true;
                   home-manager.users.barney = import node.home;
-                  home-manager.users.root = import node.home;
                 }
                 ./nixos/hw/qemu.nix
               ];
