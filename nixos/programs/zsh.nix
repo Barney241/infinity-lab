@@ -31,7 +31,7 @@
     #   eval "$(starship init zsh)"
     # '';
 
-    oh-my-zsh = {
+    ohMyZsh = {
       enable = true;
 
       theme = "spaceship";
