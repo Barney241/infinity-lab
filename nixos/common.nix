@@ -1,10 +1,14 @@
 # Common config shared among all machines
 { config, pkgs, hostName, environment, lib, catalog, ... }: {
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 
   imports = [ ./roles ];
-  nixpkgs.config.allowUnfree = true;
-
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+      "electron-25.9.0"
+    ];
+  };
   # Garbage collect & optimize /nix/store daily.
   nix.gc = {
     automatic = true;
@@ -17,16 +21,23 @@
     substituters = [ "https://hyprland.cachix.org" ];
     trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
   };
+
+  # latest kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   networking.hostName = hostName;
+  networking.networkmanager.enable = lib.mkDefault true;
+  services.resolved.enable = true;
 
   environment.systemPackages = with pkgs;[
+    iwd
     git
     tmux
     tmux-sessionizer
     htop
     jq
     # neovim
-    # neovim-unwrapped
+    neovim-unwrapped
     tree
     wget
     curl
@@ -35,7 +46,11 @@
     gcc
     unzip
     ripgrep
+    fwupd
+    pciutils
+    nfs-utils
     mdadm
+    spaceship-prompt
   ];
 
   environment.sessionVariables = {
@@ -77,6 +92,7 @@
       "ssh-rsa aaaab3nzac1yc2eaaaadaqabaaabaqdr0py0dnvd/dkiphpxmav6hmg5xix7dkog4ztp3bqgsnmq8ebioedbwidxrigbuk69re1tvj+ivs60l8m58ftvjimdbux0r3jgrjnkcaiwmmtld3iyin/faqsk/seqgnj4r7ybt8rnlghzdrcf1ww76t3w6jlfdfer1lsays4wjxu4s8m3lci7r8bdwdp8aonmau3vlrwne7/ow/zqd7ohik4ia9f2zffvqa/ptwmaquytxn1slprsron+gk6g4lulj9bffft9qtscz8duycjqs5ua0f+ssjzrsprrdt+baiesg2zx2+hraja1y7/2nosuhwappk6e/k8fsb8rqbyd pavel@laptop-30gsn6dn"
     ];
   };
+
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
   users.users.root.shell = pkgs.zsh;
@@ -86,28 +102,11 @@
     DefaultTimeoutStopSec=10s
   '';
 
-  fonts = {
-    #This is depricated new sytax will
-    packages = with pkgs; [
-      #be enforced in the next realease
-      noto-fonts
-      noto-fonts-cjk
-      noto-fonts-emoji
-      font-awesome
-      source-han-sans
-      source-han-sans-japanese
-      source-han-serif-japanese
-      (nerdfonts.override { fonts = [ "Meslo" ]; })
-    ];
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        monospace = [ "Meslo LG M Regular Nerd Font Complete Mono" ];
-        serif = [ "Noto Serif" "Source Han Serif" ];
-        sansSerif = [ "Noto Sans" "Source Han Sans" ];
-      };
-    };
-  };
+  # disk automount
+  services.devmon.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+  services.fwupd.enable = true;
 
   # age.secrets = {
   #   influxdb-telegraf.file = ./secrets/influxdb-telegraf.age;

@@ -2,7 +2,7 @@
   imports = [
     ./desktop.nix
     ./dev.nix
-    ./dns.nix
+    # ./dns.nix
     ./docker.nix
     ./gaming.nix
     ./jupyter.nix

@@ -13,6 +13,8 @@ in
         steam
         steam-run
         lutris
+        gamescope
+        prismlauncher
         xorg.xinput
         (lutris.override {
           extraPkgs = pkgs: [
