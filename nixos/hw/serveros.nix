@@ -1,6 +1,9 @@
 { lib, config, pkgs, modulesPath, ... }:
 {
-  boot.loader.systemd-boot.enable = true;
+  # boot.loader.systemd-boot.enable = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.useOSProber = true;
 
   imports =
     [
@@ -14,13 +17,17 @@
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-label/nixos";
+      device = "/dev/disk/by-uuid/4e263e7d-37a1-4be5-86e9-24d514be4335";
       fsType = "ext4";
     };
-    "/backup" = {
-      device = "/dev/disk/by-label/backup";
-      fsType = "ext4";
-    };
+    # "/boot" = {
+    # device = "/dev/disk/by-label/sr0";
+    # fsType = "vfat";
+    # };
+    # "/backup" = {
+    # device = "/dev/disk/by-label/backup";
+    # fsType = "ext4";
+    # };
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -32,7 +39,7 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  swapDevices = [{ device = "/swapfile"; size = 16382; }];
+  # swapDevices = [{ device = "/swapfile"; size = 16382; }];
 
-  gpus.nvidia.enable = true;
+  # gpus.nvidia.enable = true;
 }

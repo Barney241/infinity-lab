@@ -24,7 +24,13 @@
       enable = true;
     };
     jupyter = {
+      enable = false;
+    };
+    gaming = {
       enable = true;
+    };
+    hyprland = {
+      enable = false;
     };
   };
 }

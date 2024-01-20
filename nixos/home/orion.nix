@@ -6,5 +6,6 @@
     ../programs/zsh.nix
     ../programs/git.nix
     ../programs/sway.nix
+    ../programs/desktop.nix
   ];
 }

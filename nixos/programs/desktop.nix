@@ -10,6 +10,8 @@
     notion-app-enhanced
     chromium
     bitwarden
+    jetbrains-toolbox
+    vscode
   ];
 
   services.blueman-applet.enable = true;

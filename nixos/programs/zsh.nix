@@ -36,6 +36,11 @@
 
       plugins = [
         "git"
+        "fzf"
+        # "history-substring-search"
+        "colored-man-pages"
+        # "zsh-autosuggestions"
+        "z"
         "tmux"
         "docker"
         "kubectl"
@@ -52,6 +57,16 @@
           sha256 = "0zmq66dzasmr5pwribyh4kbkk23jxbpdw4rjxx0i7dx8jjp2lzl4";
         };
         file = "zsh-syntax-highlighting.zsh";
+      }
+      {
+        name = "zsh-spaceship-prompt";
+        src = fetchFromGitHub {
+          owner = "spaceship-prompt";
+          repo = "spaceship-prompt";
+          rev = "v4.15.0";
+          hash = "sha256-QCaZCSgg5BF8d2IIatkDBbVBL5CpzwoF94qfu2e4zTo=";
+        };
+        file = "spaceship.zsh-theme";
       }
       {
         name = "zsh-nix-shell";
@@ -78,21 +93,21 @@
   #   ZSH_THEME = "spaceship";
   # };
 
-  programs.starship = {
-    enable = true;
-    # Configuration written to ~/.config/starship.toml
-    settings = {
-      # add_newline = false;
-
-      # character = {
-      #   success_symbol = "[➜](bold green)";
-      #   error_symbol = "[➜](bold red)";
-      # };
-
-      # package.disabled = true;
-    };
-  };
-
+  # programs.starship = {
+  #   enable = false;
+  #   # Configuration written to ~/.config/starship.toml
+  #   settings = {
+  #     # add_newline = false;
+  #
+  #     # character = {
+  #     #   success_symbol = "[➜](bold green)";
+  #     #   error_symbol = "[➜](bold red)";
+  #     # };
+  #
+  #     # package.disabled = true;
+  #   };
+  # };
+  #
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;

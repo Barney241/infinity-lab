@@ -1,7 +1,7 @@
 {
   description = "Machine images configurations";
   inputs = {
-    nixpkgs.url = "github:Barney241/nixpkgs/netclient";
+    nixpkgs.url = "github:wexder/nixpkgs/netclient";
     config.url = "github:Barney241/infinity-lab";
     vpn = {
       url = "github:wexder/snowy-lab/5d0ff077?dir=configurations/machines/vpn";

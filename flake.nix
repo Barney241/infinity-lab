@@ -2,7 +2,7 @@
   description = "Input into the infinity lab";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
@@ -12,9 +12,13 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    hyprland.url = "github:hyprwm/Hyprland";
+
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
-  outputs = { self, nixpkgs, agenix, flake-utils, home-manager, ... }@attrs:
+  outputs = { self, nixpkgs, agenix, flake-utils, home-manager, hyprland, vscode-server, ... }@attrs:
     let
       inherit (nixpkgs.lib)
         mapAttrs mapAttrs' nixosSystem;
@@ -47,6 +51,11 @@
                     home-manager.useUserPackages = true;
                     home-manager.users.barney = import node.home;
                   }
+
+                  vscode-server.nixosModules.default
+                  ({ config, pkgs, ... }: {
+                    services.vscode-server.enable = true;
+                  })
                 ];
               })
             catalog.nodes;

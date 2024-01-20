@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }: {
   imports = [
-    ./amd.nix
-    ./nvidia.nix
+    # ./amd.nix
+    # ./nvidia.nix
   ];
 }
