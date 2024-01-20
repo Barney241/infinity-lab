@@ -84,8 +84,8 @@
   #   ZSH_THEME = "spaceship";
   # };
 
-  programs.spaceship-prompt = {
-    enable = true;
+  programs.starship = {
+    enable = false;
     # Configuration written to ~/.config/starship.toml
     settings = {
       # add_newline = false;
