@@ -34,15 +34,13 @@
     oh-my-zsh = {
       enable = true;
 
-      theme = "spaceship";
-
       plugins = [
         "git"
         "fzf"
         # "history-substring-search"
         "colored-man-pages"
         # "zsh-autosuggestions"
-        "zsh-z"
+        "z"
         "tmux"
         "docker"
         "kubectl"
