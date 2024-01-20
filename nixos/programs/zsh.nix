@@ -36,9 +36,15 @@
 
       plugins = [
         "git"
+        "fzf"
+        # "history-substring-search"
+        "colored-man-pages"
+        # "zsh-autosuggestions"
+        "zsh-z"
         "tmux"
         "docker"
         "kubectl"
+
         # "ssh-agent"
       ];
     };
@@ -78,7 +84,7 @@
   #   ZSH_THEME = "spaceship";
   # };
 
-  programs.starship = {
+  programs.spaceship-prompt = {
     enable = true;
     # Configuration written to ~/.config/starship.toml
     settings = {
