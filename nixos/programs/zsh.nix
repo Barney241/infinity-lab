@@ -34,6 +34,11 @@
     oh-my-zsh = {
       enable = true;
 
+      theme = "spaceship";
+      customThemes = {
+        spaceship = pkgs.spaceship-prompt;
+      };
+
       plugins = [
         "git"
         "fzf"
