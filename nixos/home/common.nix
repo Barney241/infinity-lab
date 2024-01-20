@@ -8,7 +8,7 @@
   home.username = "barney";
   home.homeDirectory = "/home/barney";
 
-  imports = [
-    ../programs/nvim.nix
-  ];
+  # imports = [
+  #   ../programs/nvim.nix
+  # ];
 }
