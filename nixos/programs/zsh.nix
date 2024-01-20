@@ -35,9 +35,11 @@
       enable = true;
 
       theme = "spaceship";
-      customThemes = {
-        spaceship = pkgs.spaceship-prompt;
-      };
+
+      customPkgs = [
+        pkgs.spaceship-prompt
+        # and even more...
+      ];
 
       plugins = [
         "git"
@@ -89,21 +91,21 @@
   #   ZSH_THEME = "spaceship";
   # };
 
-  programs.starship = {
-    enable = false;
-    # Configuration written to ~/.config/starship.toml
-    settings = {
-      # add_newline = false;
-
-      # character = {
-      #   success_symbol = "[➜](bold green)";
-      #   error_symbol = "[➜](bold red)";
-      # };
-
-      # package.disabled = true;
-    };
-  };
-
+  # programs.starship = {
+  #   enable = false;
+  #   # Configuration written to ~/.config/starship.toml
+  #   settings = {
+  #     # add_newline = false;
+  #
+  #     # character = {
+  #     #   success_symbol = "[➜](bold green)";
+  #     #   error_symbol = "[➜](bold red)";
+  #     # };
+  #
+  #     # package.disabled = true;
+  #   };
+  # };
+  #
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
