@@ -36,8 +36,7 @@
     tmux-sessionizer
     htop
     jq
-    # neovim
-    # neovim-unwrapped
+    neovim-unwrapped
     tree
     wget
     curl
@@ -51,7 +50,6 @@
     nfs-utils
     mdadm
     spaceship-prompt
-    vimPlugins.packer-nvim
   ];
 
   environment.sessionVariables = {
