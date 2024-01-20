@@ -36,11 +36,6 @@
 
       theme = "spaceship";
 
-      custom-pkgs = [
-        pkgs.spaceship-prompt
-        # and even more...
-      ];
-
       plugins = [
         "git"
         "fzf"
@@ -51,7 +46,7 @@
         "tmux"
         "docker"
         "kubectl"
-
+        "spaceship"
         # "ssh-agent"
       ];
     };
