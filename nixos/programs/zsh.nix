@@ -66,7 +66,7 @@
           owner = "spaceship-prompt";
           repo = "spaceship-prompt";
           rev = "v4.15.0";
-          sha256 = pkgs.lib.fakeSha256;
+          sha256 = "QCaZCSgg5BF8d2IIatkDBbVBL5CpzwoF94qfu2e4zTo";
         };
         file = "spaceship.zsh-theme";
       }
