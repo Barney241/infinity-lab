@@ -51,6 +51,7 @@
     nfs-utils
     mdadm
     spaceship-prompt
+    vimPlugins.packer-nvim
   ];
 
   environment.sessionVariables = {
