@@ -73,7 +73,7 @@
 
   security.polkit.enable = true;
 
-  users.mutableUsers = false;
+  users.mutableUsers = true;
   users.users.barney = {
     isNormalUser = true;
     home = "/home/barney";
