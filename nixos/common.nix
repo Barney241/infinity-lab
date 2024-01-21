@@ -64,7 +64,8 @@
   services.openssh = {
     enable = true;
     settings = {
-      PermitRootLogin = "yes";
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
     };
   };
 
@@ -72,6 +73,7 @@
   time.timeZone = "Europe/Prague";
 
   security.polkit.enable = true;
+
 
   users.mutableUsers = true;
   users.users.barney = {
@@ -81,6 +83,18 @@
     extraGroups = [ "wheel" ];
     initialPassword = "test";
   };
+  users.users.barney.openssh.authorizedKeys.keys = [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDRDFkF6kSPbQtqjqUKjeQXuZ8rNhazKnNEgWTerpEak1thd2NJQEtQP+BSWpdTHA/k6d9f16AYsmrE2DcMnFH4xWBX9cuWdOMxA1E4uo/JtSCL3SUBDb86EaD+EuFno9x6Njtpdukho7K/K0+88PIum4IfosR7t0mLfLjrvzXiVGXZg2yWzBwT28rO8MyHlC2trWmDa+91gK/hd1Rc2YWNfSaxjmyaP3CL6HyIM1AZP3GBoe5iOq8ys9aoOzGcKUs5+BXfXFhSps2RExnWGJv7FdHnMGKmERFfWwPtw7XhbIK015m0eF/oOlUZ37wGARYbp5pkgQIkmg50jaJNgPNX paveladamek@nextaps-MacBook-Pro-2.local"
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCHGmpOxOGR9i3CVE1WMT9hudFQ0nlMR32kGazAQGfcOUu7CH49Au6jC8Yj0q11NwmWJba9Osda9xT6VbjQoCDNcfNutCGHtf1WWgl2VKV91tTyeQ4fxjJsN1pAVkqm37l9qyvK8yLRYzyTmrCpf2lFmHCTB5IsQm0K8Us/0uTccbX1jt0d35VjIfJnwmFbEClQZbD9dOfrAPUVvcSHmw9yrsBYFsxdB1kfXoZwqkOs7uoHBSB+MKXX08u5QiFS9c16arTbA5sOk/0wcdC/1nWYj7ymZ7Co0LD90fwMlApSN3bv3AUcJ9Qxu2OoeHbkSleUy1WqxZw+azakIm/vLCZv rsa-key-20220115"
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDR0Py0dNvD/DkIpHPXMav6Hmg5xix7dkOG4ztP3BqgSnmq8ebioeDBWIDxRIGBUk69RE1TVJ+iVs60l8M58FtVJiMDbuX0R3JgRJNkCaiwmMTlD3IYin/fAqSk/seQGNj4R7YbT8rNLGhzdRcf1ww76t3w6JlfDfER1lSayS4WjxU4s8m3lCi7r8BdwDp8aOnmaU3vlrwne7/OW/ZQD7oHik4IA9f2zFFVQA/PTWmaQuYtxn1SLPRSRon+Gk6G4lULJ9bFFft9qTscZ8DuyCjQS5uA0F+SSJZRspRRDT+BAIesg2Zx2+HrajA1Y7/2NOsuhWAPpK6e/k8fsB8rqbyD pavel@LAPTOP-30GSN6DN"
+  ];
+
+  users.users.docker = {
+    isSystemUser = true;
+    uid=1001;
+    group="wheel";
+  };
+
 
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
