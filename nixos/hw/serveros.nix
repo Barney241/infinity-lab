@@ -42,6 +42,10 @@ ARRAY /dev/md/0 level=raid1 num-devices=2 metadata=1.2 name=serveros:0 UUID=8970
       device = "/dev/disk/by-uuid/e891b814-1ce9-4448-b979-f20f6ff0221e";
       fsType = "ext4";
     };
+    "/disks/ssd1" = {
+      device = "/dev/disk/by-uuid/f55f7702-ac29-42bd-8552-0c00a5a5aea1";
+      fsType = "ext4";
+    };
     "/boot" = {
       device = "/dev/disk/by-uuid/221C-E69A";
       fsType = "vfat";
@@ -59,5 +63,5 @@ ARRAY /dev/md/0 level=raid1 num-devices=2 metadata=1.2 name=serveros:0 UUID=8970
 
   # swapDevices = [{ device = "/swapfile"; size = 16382; }];
 
- #gpus.nvidia.enable = true;
+  gpus.nvidia.enable = true;
 }

@@ -12,6 +12,8 @@
     bitwarden
     jetbrains-toolbox
     vscode
+    spotify
+    google-chrome
   ];
 
   services.blueman-applet.enable = true;

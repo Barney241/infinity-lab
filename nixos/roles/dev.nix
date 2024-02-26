@@ -12,22 +12,26 @@ in
       environment.systemPackages = with pkgs;[
         bash
         doctl
-        postgresql
+        postgresql_16
         kubectl
         nil
         rustup
-        go
+        # go
+        go_1_22
+        natscli
         rustc
         nodejs_20
         cachix
         gnumake
         docker-compose
         jetbrains.jdk
+        # jetbrains.jdk-no-jcef
         jetbrains.goland
-        jetbrains.idea-ultimate
-        jetbrains.pycharm-professional
-        jetbrains.phpstorm
-        jetbrains.webstorm
+        # jetbrains.idea-ultimate
+        # jetbrains.pycharm-professional
+        # jetbrains.phpstorm
+        # jetbrains.webstorm
+        liquibase
       ];
 
 

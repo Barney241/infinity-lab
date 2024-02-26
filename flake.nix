@@ -40,7 +40,6 @@
                 specialArgs = attrs // {
                   inherit catalog;
                   hostName = host;
-                  environment = "prod";
                 };
                 modules = [
                   node.config

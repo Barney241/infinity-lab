@@ -24,7 +24,7 @@
       enable = true;
     };
     jupyter = {
-      enable = false;
+      enable = true;
     };
     gaming = {
       enable = true;
