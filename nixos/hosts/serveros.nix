@@ -6,8 +6,21 @@
   networking = {
     hostName = "serveros";
     firewall = {
-      enable = false;
-    };
+        enable = true;
+        allowPing = true;
+        allowedUDPPortRanges = [
+            {
+                from = 0;
+                to = 65535;
+            }
+        ];
+        allowedTCPPortRanges = [
+            {
+                from = 0;
+                to = 65535;
+            }
+        ];    
+    };   
   };
 
   roles = {

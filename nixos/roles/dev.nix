@@ -32,6 +32,7 @@ in
         # jetbrains.phpstorm
         # jetbrains.webstorm
         liquibase
+        poetry
       ];
 
 

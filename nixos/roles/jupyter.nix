@@ -36,6 +36,8 @@ in
 
       services.jupyter = {
         enable = true;
+        ip = "0.0.0.0";
+        port = 8888;
         command = "jupyter-lab";
         user = "barney";
         group = "jupyter";
