@@ -14,6 +14,8 @@
     vscode
     spotify
     google-chrome
+    teamspeak5_client
+    solaar
   ];
 
   services.blueman-applet.enable = true;
