@@ -13,10 +13,12 @@ in
 
   config = lib.mkIf cfg.enable
     {
+      security.rtkit.enable = true;
+
       services.xserver.enable = true;
       services.xserver.displayManager.sddm.enable = true;
-      services.xserver.desktopManager.plasma5.enable = true;
-      services.xserver.displayManager.defaultSession = "plasmawayland";
+      services.xserver.displayManager.sddm.wayland.enable = true;
+      services.desktopManager.plasma6.enable = true;
       services.pipewire = {
           enable = true;
           alsa.enable = true;
@@ -25,14 +27,14 @@ in
           jack.enable = true;
       };
 
-      environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+    environment.plasma6.excludePackages = with pkgs.kdePackages; [
         elisa
-        gwenview
-        okular
+        # gwenview
+        # okular
         oxygen
         khelpcenter
         konsole
-        plasma-browser-integration
+        # plasma-browser-integration
         print-manager
       ];
     };

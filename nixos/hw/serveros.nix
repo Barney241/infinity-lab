@@ -1,10 +1,18 @@
 { lib, config, pkgs, modulesPath, ... }:
 {
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  #boot.loader.grub.enable = true;
-  #boot.loader.grub.device = "/dev/sda";
-  #boot.loader.grub.useOSProber = true;
+
+  boot.loader = {
+    efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/efi"; # ← use the same mount point here.
+    };
+    grub = {
+        enable = true;
+        efiSupport = true;
+        devices = [ "nodev" ];
+        useOSProber = true;
+   };
+  };
 
   imports =
     [
@@ -42,15 +50,16 @@ ARRAY /dev/md/0 level=raid1 num-devices=2 metadata=1.2 name=serveros:0 UUID=8970
       device = "/dev/disk/by-uuid/e891b814-1ce9-4448-b979-f20f6ff0221e";
       fsType = "ext4";
     };
-    "/disks/ssd1" = {
-      device = "/dev/disk/by-uuid/f55f7702-ac29-42bd-8552-0c00a5a5aea1";
-      fsType = "ext4";
-    };
-    "/boot" = {
-      device = "/dev/disk/by-uuid/221C-E69A";
-      fsType = "vfat";
-    };
+     "/efi" = {
+       device = "/dev/disk/by-uuid/EBAD-07A2";
+       fsType = "vfat";
+    };  
   };
+
+  swapDevices = [ {
+    device = "/var/lib/swapfile";
+    size = 16*1024; # in MiB
+  } ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

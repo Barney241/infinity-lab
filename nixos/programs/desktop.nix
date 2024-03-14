@@ -16,6 +16,9 @@
     google-chrome
     teamspeak5_client
     solaar
+    notion-app-enhanced
+    gnome.gnome-calculator
+    gnome.gnome-disk-utility
   ];
 
   services.blueman-applet.enable = true;
