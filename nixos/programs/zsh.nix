@@ -3,6 +3,7 @@
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
+    # autosuggestions.enable=true;
     enableAutosuggestions = true;
     enableCompletion = true;
     shellAliases = {
@@ -22,7 +23,7 @@
       # nix
       ns = "nix-shell shell.nix";
       nd = "nix develop";
-      nixos-full-upgrade = "sudo rm /etc/nixos/flake.lock && nix-collect-garbage && sudo nixos-rebuild switch";
+      nixos-full-upgrade = "sudo mv ~/Projects/infinity-lab/flake.lock ~/Projects/infinity-lab/flake.lock.backup && nix-collect-garbage && sudo nixos-rebuild switch";
       # kubectl
       k = "kubectl";
     };

@@ -69,6 +69,7 @@
     };
     allowSFTP = true;
   };
+  programs.ssh.startAgent = true;
 
 
   time.timeZone = "Europe/Prague";

@@ -19,20 +19,31 @@ in
         # go
         go_1_22
         natscli
+
+        #rust
         rustc
+        cargo
+        pkg-config
+        openssl
+        rustfmt
+        rustup
+        
+        #lsp
+        rust-analyzer
+        buf-language-server
+
         nodejs_20
         cachix
         gnumake
         docker-compose
         jetbrains.jdk
-        # jetbrains.jdk-no-jcef
         jetbrains.goland
-        # jetbrains.idea-ultimate
+        jetbrains.idea-ultimate
         # jetbrains.pycharm-professional
         # jetbrains.phpstorm
         # jetbrains.webstorm
         liquibase
-        poetry
+        # poetry
       ];
 
 
