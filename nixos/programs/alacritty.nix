@@ -9,25 +9,25 @@
       window.opacity = 0.85;
       scrolling.history = 50000;
 
-      # font = {
-      #   normal = {
-      #     family = "FiraCode Nerd Font Mono";
-      #     style = "Regular";
-      #   };
-      #   bold = {
-      #     family = "FiraCode Nerd Font Mono";
-      #     style = "Bold";
-      #   };
-      #   italic = {
-      #     family = "FiraCode Nerd Font Mono";
-      #     style = "Italic";
-      #   };
-      #   bold_italic = {
-      #     family = "FiraCode Nerd Font Mono";
-      #     style = "Bold Italic";
-      #   };
-      # };
-      #
+      font = {
+        normal = {
+          family = "FiraCode Nerd Font Mono";
+          style = "Regular";
+        };
+        bold = {
+          family = "FiraCode Nerd Font Mono";
+          style = "Bold";
+        };
+        italic = {
+          family = "FiraCode Nerd Font Mono";
+          style = "Italic";
+        };
+        bold_italic = {
+          family = "FiraCode Nerd Font Mono";
+          style = "Bold Italic";
+        };
+      };
+
       # Point size
       # size = 12.0;
       colors = {

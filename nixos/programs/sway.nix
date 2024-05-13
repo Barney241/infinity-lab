@@ -12,47 +12,63 @@
 
   home.file.".config/sway/kill.sh".text = (builtins.readFile ./sway/kill.sh);
   home.file.".config/wallpapers".source = (pkgs.fetchFromGitHub {
-    owner = "wexder";
-    repo = "snowy-lab-wallpapers";
-    rev = "740628d1f852c15d186fff559441cce3609aca3a";
-    sha256 = "0qr0cg03rj9i9wb7q0s7xkjhmx4wmx37dnjdl1y2aahgc2r6cvm3";
+    owner = "Barney241";
+    repo = "desktop-wallpapers";
+    rev = "a2075354eef856bbf1f507de44504d1a5cbb01c4";
+    hash = "sha256-avBC0jiXfInhH9avVcyKtNQudXeP7THJkw9QpnBONbA=";
   });
 
-  home.packages = with pkgs; [
-    kanshi
-    mako
-    wallutils
-    wl-clipboard
-    libsForQt5.kdeconnect-kde
-    wdisplays
-    waypipe
+ home.packages = [
+    pkgs.dbus # make dbus-update-activation-environment available in the path
+    pkgs.kanshi
+    pkgs.mako
+    pkgs.wallutils
+    pkgs.wl-clipboard
+    pkgs.libsForQt5.kdeconnect-kde
+    pkgs.wdisplays
+    pkgs.waypipe
+    pkgs.dconf
+    pkgs.swaylock
+    pkgs.swayidle
   ];
 
   home.sessionVariables = {
     XDG_CURRENT_DESKTOP = "sway";
     NIXOS_OZONE_WL = 1;
+    WLR_NO_HARDWARE_CURSORS = "1";
+  };
+  services.cliphist.enable = true;
+  gtk = {
+    enable = true;
+    cursorTheme = {
+      name = "Vanilla-DMZ";
+      package = pkgs.vanilla-dmz;
+    };
+    theme = {
+      name = "Catppuccin-Macchiato-Compact-Pink-Dark";
+      package = pkgs.catppuccin-gtk.override {
+        accents = [ "pink" ];
+        size = "compact";
+        tweaks = [ "rimless" "black" ];
+        variant = "macchiato";
+      };
+    };
   };
 
   wayland.windowManager.sway = {
     enable = true;
     systemd.enable = true;
+    wrapperFeatures.gtk = true;
     xwayland = true;
-    config = rec {
+    config = {
       modifier = "Mod4";
       # Use kitty as default terminal
       terminal = "alacritty";
       startup = [
-        # Launch Firefox on start
-        { command = "firefox"; }
-
-        ### Needed for xdg-desktop-portal-kde
-        { command = "dbus-update-activation-environment --systemd --all"; }
-        { command = "/usr/lib/xdg-desktop-portal --replace"; }
         { command = "kdeconnect-indicator"; }
         { command = "mako"; }
-        { command = "kanshi"; }
-        { command = "slack --enable-features=WebRTCPipeWireCapturer"; }
-        { command = "setrandom -m scale /home/wexder/.config/wallpapers"; }
+        { command = "slack"; }
+        { command = "setrandom -m scale /home/barney/.config/wallpapers"; }
         { command = "alacritty"; }
 
         ## cliphist
@@ -75,7 +91,11 @@
         { command = "bitwarden"; }
 
         # steam
-        { command = "steam-runtime"; }
+        { command = "steam"; }
+
+        # kanshi
+        # { command = "exec sleep 5; systemctl --user start kanshi.service"; }
+        { command = "kanshi"; }
       ];
       modes = {
         resize = {
@@ -95,9 +115,9 @@
           xkb_options = "grp:win_space_toggle";
         };
       };
-      gaps = {
-        inner = 10;
-      };
+      # gaps = {
+      #   inner = 0;
+      # };
       # floating = {
       #   border = 0;
       # };
@@ -131,6 +151,15 @@
           }
         ];
       };
+      colors = {
+        focused = {
+          border = "#eb4d4b";
+          background = "#285577";
+          text = "#ffffff";
+          childBorder = "#d76a92";
+          indicator = "#d76a92";
+        };
+      };
       keybindings =
         let
           modifier = config.wayland.windowManager.sway.config.modifier;
@@ -140,8 +169,8 @@
           "${modifier}+Return" = "exec alacritty";
 
           # kill focused window
-          # "${modifier}+q" = "kill";
-          "${modifier}+q" = "exec /wexder/home/.config/sway/kill.sh";
+          "${modifier}+q" = "kill";
+          # "${modifier}+q" = "exec /barney/home/.config/sway/kill.sh";
 
           # start your launcher
           "${modifier}+shift+d" = "exec wofi --show drun";
@@ -153,13 +182,13 @@
           "${modifier}+Shift+V" = "exec cliphist list | wofi -dmenu | cliphist decode | wl-copy";
 
           # Random wallpaper
-          "Mod1+N" = "exec setrandom -m scale /wexder/home/.config/wallpapers";
+          "Mod1+N" = "exec setrandom -m scale /barney/home/.config/wallpapers";
 
           # exit sway (logs you out of your Wayland session)
           "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
 
           "${modifier}+F12" = "exec shutdown now";
-          "${modifier}+Control+L" = "exec swaylock -f -i /wexder/home/.config/wallpapers/mountains-on-mars.png -s fill";
+          "${modifier}+Control+L" = "exec swaylock -f -i /home/barney/.config/wallpapers/mountains-on-mars.png -s fill";
           "${modifier}+shift+return" = "exec thunar";
           "${modifier}+F2" = "exec cantata";
           "${modifier}+F3" = "exec mpv --player-operation-mode=pseudo-gui";
@@ -169,7 +198,7 @@
           "${modifier}+F7" = "exec notify-send $(weather)";
           "${modifier}+F8" = "exec pkill kmousetool || kmousetool";
           "${modifier}+shift+F4" = "exec firefox --private-window";
-          "Print" = "exec grim -g '$(slurp)' - | swappy -f -";
+          "Print" = "exec grim -g \"$(slurp)\" - | swappy -f -";
           "Control+Print" = "exec grim - | swappy -f -";
           "${modifier}+tab" = "workspace back_and_forth";
 
@@ -178,6 +207,7 @@
           #
 
           # Pulse Audio controls
+          # not working
           "--locked XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume 0 +5%"; #increase sound volume
           "--locked XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume 0 -5%"; #decrease sound volume
           "--locked XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute 0 toggle"; # mute sound
@@ -190,8 +220,8 @@
           # Lenov --locked  have phone instead of media keys
           "--locked XF86PickupPhone" = "exec playerctl previous";
 
-          "--locked XF86MonBrightnessUp" = "exec brightnessctl set +2000";
-          "--locked XF86MonBrightnessDown" = "exec brightnessctl set 2000-";
+          "--locked XF86MonBrightnessUp" = "exec brightnessctl set +25";
+          "--locked XF86MonBrightnessDown" = "exec brightnessctl set 25-";
 
           #
           # Moving around:
@@ -286,12 +316,25 @@
         };
     };
     extraConfig = ''
+      # set $gnome-schema org.gnome.desktop.interface
+      #
+      # exec_always {
+      #     gsettings set $gnome-schema gtk-theme 'Catppuccin-Mocha-Standard-Pink-Dark'
+      #         gsettings set $gnome-schema icon-theme 'Catppuccin-Mocha-Standard-Pink-Dark'
+      #         gsettings set $gnome-schema cursor-theme 'Catppuccin-Mocha-Standard-Pink-Dark'
+      #         gsettings set $gnome-schema font-name 'Catppuccin-Mocha-Standard-Pink-Dark'
+      # }
       default_border pixel
       default_floating_border pixel
-      hide_edge_borders smart
+      hide_edge_borders --i3 smart
       titlebar_border_thickness 2
       titlebar_padding 2
-    '';
+      font monospace 0.1
+
+      # testing
+      exec systemctl --user import-environment
+    ''; 
+    extraOptions = ["--unsupported-gpu"];
   };
 
 }

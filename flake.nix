@@ -2,23 +2,36 @@
   description = "Input into the infinity lab";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs";
 
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-utils.url = "github:numtide/flake-utils";
-    # flake-utils.inputs.nixpkgs.follows = "nixpkgs";
+    flake-utils.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "github:nix-community/home-manager/master";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixos-generators.url = "github:nix-community/nixos-generators";
+    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+    nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland.url = "github:hyprwm/Hyprland";
 
     vscode-server.url = "github:nix-community/nixos-vscode-server";
+
+    zig.url = "github:mitchellh/zig-overlay";
+    zig.inputs.nixpkgs.follows = "nixpkgs";
+
+    zls.url = "github:zigtools/zls";
+    zls.inputs.nixpkgs.follows = "nixpkgs";
+    zls.inputs.zig-overlay.follows = "zig";
   };
 
-  outputs = { self, nixpkgs, agenix, flake-utils, home-manager, hyprland, vscode-server, ... }@attrs:
+  outputs = { self, nixpkgs, nixpkgs-wayland, agenix, flake-utils, home-manager, hyprland, vscode-server, nixos-generators, zig, zls, ... }@attrs:
     let
       inherit (nixpkgs.lib)
         mapAttrs mapAttrs' nixosSystem;
@@ -40,6 +53,8 @@
                 specialArgs = attrs // {
                   inherit catalog;
                   hostName = host;
+                  zig = zig.packages.${node.system};
+                  zls = zls.packages.${node.system};
                 };
                 modules = [
                   node.config
@@ -49,6 +64,11 @@
                     home-manager.useGlobalPkgs = true;
                     home-manager.useUserPackages = true;
                     home-manager.users.barney = import node.home;
+                    home-manager.backupFileExtension = "backup";
+                  }
+                  agenix.nixosModules.default
+                  {
+                    environment.systemPackages = [ agenix.packages.${node.system}.default ];
                   }
 
                   vscode-server.nixosModules.default
@@ -60,42 +80,5 @@
             catalog.nodes;
         in
         metalSystems;
-
-      # Generate an SD card image for each host.
-      images = mapAttrs
-        (host: node: nixosConfigurations.${host}.config.system.build.sdImage)
-        catalog.nodes;
-
-      # Generate VM build packages to quick test each host.  Note that these
-      # will will be x86-64 VMs, and will have a new host key, thus will be
-      # unable to decrypt agenix secrets.
-      packages =
-        let
-          # Converts node entry into a virtual machine package.
-          vmPackage = sys: host: node: {
-            name = host;
-            value = (nixosSystem {
-              system = sys;
-              specialArgs = attrs // {
-                inherit catalog;
-                hostName = host;
-                environment = "test";
-              };
-              modules = [
-                node.config
-                home-manager.nixosModules.home-manager
-                {
-                  home-manager.useGlobalPkgs = true;
-                  home-manager.useUserPackages = true;
-                  home-manager.users.barney = import node.home;
-                }
-                ./nixos/hw/qemu.nix
-              ];
-
-            }).config.system.build.vm;
-          };
-        in
-        eachSystemMap [ system.x86_64-linux ]
-          (sys: mapAttrs' (vmPackage sys) catalog.nodes);
     };
 }

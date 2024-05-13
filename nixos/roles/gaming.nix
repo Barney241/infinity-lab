@@ -23,6 +23,15 @@ in
             winetricks
           ];
         })
+        wine
+        wineWowPackages.staging
+        winetricks
+        wineWowPackages.waylandFull
+        vkd3d
+        vkdt-wayland
+        dxvk
+        q4wine # testing
+        bottles # testing
       ];
 
       programs.steam = {

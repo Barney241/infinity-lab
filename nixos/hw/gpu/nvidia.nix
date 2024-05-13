@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 let
   cfg = config.gpus.nvidia;
+
 in
 {
   options.gpus.nvidia = {
@@ -24,12 +25,17 @@ in
         cudaPackages.cudnn
         cudaPackages.cutensor
         linuxPackages.nvidia_x11
+        glxinfo
+        vulkan-tools
+        glmark2
       ];
       boot.initrd.kernelModules = [ "nvidia" ];
       boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
       # Load nvidia driver for Xorg and Wayland
       services.xserver.videoDrivers = [ "nvidia" ];
+      # Nvidia Docker
+      virtualisation.docker.enableNvidia = true;
 
       hardware.nvidia = {
 
@@ -56,7 +62,7 @@ in
         nvidiaSettings = true;
 
         # Optionally, you may need to select the appropriate driver version for your specific GPU.
-        package = config.boot.kernelPackages.nvidiaPackages.stable;
+        package = config.boot.kernelPackages.nvidiaPackages.beta;
       };
 
     };

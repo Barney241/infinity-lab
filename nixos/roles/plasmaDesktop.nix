@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }:
 let
-  cfg = config.roles.xMinimalDesktop;
+  cfg = config.roles.plasmaDesktop;
 in
 {
-  options.roles.xMinimalDesktop = {
+  options.roles.plasmaDesktop = {
     enable = lib.mkOption {
       default = false;
       example = true;
@@ -55,7 +55,7 @@ in
       # services.xserver.displayManager.defaultSession = "plasma";
       # services.xserver.displayManager.sddm.wayland.enable = true;
 
-      services.xserver.displayManager.defaultSession = "plasmax11";
+      # services.xserver.displayManager.defaultSession = "plasmax11";
 
       environment.plasma6.excludePackages = with pkgs.kdePackages; [
         elisa

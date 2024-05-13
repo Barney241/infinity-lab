@@ -3,8 +3,8 @@
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
-    # autosuggestions.enable=true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
+    # enableAutosuggestions = true;
     enableCompletion = true;
     shellAliases = {
       #list

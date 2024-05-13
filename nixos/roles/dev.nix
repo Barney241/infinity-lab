@@ -29,7 +29,6 @@ in
         rustup
         
         #lsp
-        rust-analyzer
         buf-language-server
 
         nodejs_20

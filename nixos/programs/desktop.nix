@@ -24,29 +24,43 @@ in
 {
   home.packages = [
     pkgs.libsForQt5.kdeconnect-kde
-    # pkgs.libsForQt5.bismuthpro
+
+    #dev
     slack
     pkgs.dbeaver
     postman
-    pkgs.caprine-bin
-    pkgs.resp-app
-    pkgs.notion-app-enhanced
-    pkgs.chromium
-    pkgs.bitwarden
-    pkgs.jetbrains-toolbox
     pkgs.vscode
-    pkgs.spotify
-    pkgs.google-chrome
+    pkgs.jetbrains-toolbox
+    pkgs.resp-app #redis client
+
+    #social
+    pkgs.caprine-bin
     pkgs.teamspeak5_client
-    pkgs.solaar
+
+    #browsers
+    pkgs.google-chrome
+    pkgs.chromium
+
+    #media
+    pkgs.vlc
+    pkgs.spotify
+
+    #system apps
+    pkgs.notion-app-enhanced
+    pkgs.bitwarden-cli
+    pkgs.bitwarden
+    pkgs.solaar #logitech
     pkgs.notion-app-enhanced
     pkgs.gnome.gnome-calculator
     pkgs.gnome.gnome-disk-utility
+    pkgs.gnome.gnome-terminal
     pkgs.libreoffice
     pkgs.piper
-    pkgs.polychromatic
+    pkgs.polychromatic #razer
+
+    #remote desktop
     pkgs.teamviewer
-    # pkgs.rustdesk
+    pkgs.rustdesk
   ];
 
   services.blueman-applet.enable = true;

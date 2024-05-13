@@ -30,8 +30,10 @@
     dev = {
       enable = true;
     };
-    xMinimalDesktop = {
-      enable = true;
+    lsp = {
+      go = true;
+      rust = true;
+      zig = true;
     };
     tailscale = {
       enable = true;
@@ -42,8 +44,16 @@
     gaming = {
       enable = true;
     };
-    hyprland = {
-      enable = false;
+
+
+    # hyprland = {
+    #   enable = true;
+    # };
+    # desktop = {
+    #   enable = true;
+    # };
+    plasmaDesktop = {
+      enable = true;
     };
   };
 }
