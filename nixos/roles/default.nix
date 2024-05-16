@@ -11,5 +11,7 @@
     ./tailscale.nix
     ./plasmaDesktop.nix
     ./hyprland.nix
+    ./pipewire.nix
+    ./ssh.nix
   ];
 }

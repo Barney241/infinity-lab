@@ -2,7 +2,9 @@
   description = "Input into the infinity lab";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
@@ -19,6 +21,22 @@
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
 
+    nur.url = "github:nix-community/NUR";
+
+    nix-gaming.url = "github:fufexan/nix-gaming";
+
+    plasma-manager = {
+      url = "github:pjones/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
+    # KDE
+    kwin-effects-forceblur = {
+      url = "github:taj-ny/kwin-effects-forceblur";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hyprland.url = "github:hyprwm/Hyprland";
 
     vscode-server.url = "github:nix-community/nixos-vscode-server";
@@ -31,7 +49,7 @@
     zls.inputs.zig-overlay.follows = "zig";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-wayland, agenix, flake-utils, home-manager, hyprland, vscode-server, nixos-generators, zig, zls, ... }@attrs:
+  outputs = { self, nixpkgs, nur, flake-utils, home-manager, ... }@attrs:
     let
       inherit (nixpkgs.lib)
         mapAttrs mapAttrs' nixosSystem;
@@ -52,11 +70,14 @@
                 inherit (node) system;
                 specialArgs = attrs // {
                   inherit catalog;
+                  inherit attrs;
                   hostName = host;
-                  zig = zig.packages.${node.system};
-                  zls = zls.packages.${node.system};
+                  zig = attrs.zig.packages.${node.system};
+                  zls = attrs.zls.packages.${node.system};
                 };
                 modules = [
+                  nur.nixosModules.nur
+                  attrs.chaotic.nixosModules.default
                   node.config
                   node.hw
                   home-manager.nixosModules.home-manager
@@ -66,12 +87,8 @@
                     home-manager.users.barney = import node.home;
                     home-manager.backupFileExtension = "backup";
                   }
-                  agenix.nixosModules.default
-                  {
-                    environment.systemPackages = [ agenix.packages.${node.system}.default ];
-                  }
 
-                  vscode-server.nixosModules.default
+                  attrs.vscode-server.nixosModules.default
                   ({ config, pkgs, ... }: {
                     services.vscode-server.enable = true;
                   })

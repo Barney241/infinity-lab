@@ -1,6 +1,13 @@
 { config, pkgs, lib, ... }:
 let
   cfg = config.gpus.nvidia;
+  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
+    export __NV_PRIME_RENDER_OFFLOAD=1
+    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export __VK_LAYER_NV_optimus=NVIDIA_only
+    exec -a "$0" "$@"
+  '';
 
 in
 {
@@ -10,7 +17,6 @@ in
 
   config = lib.mkIf cfg.enable
     {
-
       nixpkgs.config.cudaSupport = true;
       # Enable OpenGL
       hardware.opengl = {
@@ -19,17 +25,21 @@ in
         driSupport32Bit = true;
       };
 
-      environment.systemPackages = with pkgs; [
-        nvtopPackages.full
-        cudaPackages.cudatoolkit
-        cudaPackages.cudnn
-        cudaPackages.cutensor
-        linuxPackages.nvidia_x11
-        glxinfo
-        vulkan-tools
-        glmark2
+      environment.systemPackages = [
+        pkgs.nvtopPackages.full
+        pkgs.cudaPackages.cudatoolkit
+        pkgs.cudaPackages.cudnn
+        pkgs.cudaPackages.cutensor
+        # pkgs.linuxPackages.nvidia_x11
+        nvidia-offload
       ];
-      boot.initrd.kernelModules = [ "nvidia" ];
+      boot.initrd.kernelModules = [
+        "nvidia"
+        "nvidia_modeset"
+        "nvidia_uvm"
+        "nvidia_drm"
+      ];
+      boot.blacklistedKernelModules = [ "nouveau" ];
       boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
       # Load nvidia driver for Xorg and Wayland
@@ -41,6 +51,7 @@ in
 
         # Modesetting is required.
         modesetting.enable = true;
+        nvidiaPersistenced = true;
 
         # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
         powerManagement.enable = false;

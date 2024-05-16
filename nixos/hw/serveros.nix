@@ -73,4 +73,18 @@ ARRAY /dev/md/0 level=raid1 num-devices=2 metadata=1.2 name=serveros:0 UUID=8970
   # swapDevices = [{ device = "/swapfile"; size = 16382; }];
 
   gpus.nvidia.enable = true;
+
+  hardware = {
+    cpu.amd.updateMicrocode = true;
+  };
+
+  services = {
+    xserver = {
+      deviceSection = ''
+        #Option "AsyncFlipSecondaries" "true"
+        Option "TearFree" "true"
+        Option "VariableRefresh" "true"
+      '';
+    };
+  };
 }

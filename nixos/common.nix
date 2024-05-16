@@ -1,36 +1,51 @@
 # Common config shared among all machines
-{ pkgs, nixpkgs-wayland, hostName, ... }: {
+{ pkgs, attrs, config, hostName, ... }: {
   system.stateVersion = "24.05";
 
   imports = [ ./roles ];
-  nixpkgs.config = {
-    allowUnfree = true;
-    permittedInsecurePackages = [
-      "electron-25.9.0"
-    ];
+  nixpkgs = {
+    config = {
+        allowUnfree = true;
+        allowBroken = false;
+        permittedInsecurePackages = [
+          "electron-25.9.0"
+        ];
+    };
+    overlays = [ attrs.nur.overlay ];
   };
+
   # Garbage collect & optimize /nix/store daily.
   nix.gc = {
     automatic = true;
-    options = "--delete-older-than 7d";
+    dates = "weekly";
+    options = "--delete-older-than 30d";
   };
   nix.optimise.automatic = true;
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [ 
+      "nix-command"
+      "flakes" 
+    ];
     auto-optimise-store = true;
     substituters = [
-              "https://cache.nixos.org"
-              "https://nixpkgs-wayland.cachix.org"
-              "https://hyprland.cachix.org"
+      "https://nyx.chaotic.cx"
+      "https://cache.nixos.org"
+      "https://hyprland.cachix.org"
+      "https://nix-gaming.cachix.org"
+      "https://nix-community.cachix.org"
+      "https://nixpkgs-wayland.cachix.org"
     ];
     trusted-public-keys = [
-              "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-              "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
-              "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      "nyx.chaotic.cx-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
     ];
   };
 
-  nixpkgs.overlays = [ nixpkgs-wayland.overlay ];
+  # nixpkgs.overlays = [ nixpkgs-wayland.overlay ];
 
   # latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -65,41 +80,24 @@
   environment.sessionVariables = {
     EDITOR = "nvim";
   };
-
-  # TODO 
-  # services.getty.helpLine =
-  #   ">>> Flake node: ${hostName}, environment: ${environment}";
-
-  programs.mosh.enable = true;
-  services.openssh = {
-    enable = true;
-    settings = {
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = false;
-    };
-    allowSFTP = true;
-  };
-  programs.ssh.startAgent = true;
-
-
+  
+  
   time.timeZone = "Europe/Prague";
 
   security.polkit.enable = true;
-
-
+ 
   users.mutableUsers = true;
   users.users.barney = {
     isNormalUser = true;
     home = "/home/barney";
     description = "barney";
-    extraGroups = [ "wheel" ];
+    extraGroups = [ 
+      "wheel"
+      "gamemode"
+    ];
     initialPassword = "test";
   };
-  users.users.barney.openssh.authorizedKeys.keys = [
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCvIiTTgyGGBVlYUgbAzdViyVYm38mKFfjL7YnmHwND5yDnoSZ12xCoM/pnZxT3/rT5iGRYaFeS6aLKX3ePLD9xfnbGHG2JeQWPGK9cavSJEs0WLa9MGXvsBlPWSSJeYp5B8rhd0B8jDIA6CILoyDhnDQ2ulVB6c6OQYThf2zG1IX+AclWjomQ4tAzDpsPX8MnP1OLXfrgUfY2xmeLFQxJU7n+xv+LRHXKyAhHUZrGTzQ5CxFnwEmWSMU5VXyO66Oh8v4GOGfFXrJzQKVddpfpl7iOAVkD+kZeq2loqwhZQFOF210j5k+pppuL0FZUONJlsbw/j+xuxMgE0BZA0ekXH1aUjAmbZjoPeyAAqldMx0eF8OVUlIpC2cSfOQaJOiQUjushfcqLPlOwr09Eq1ZES3Whs/I0RXLt0tIBDRGSVpPew07keRAL1AVqlCKMboZUVASacRAEOn4s4K6XCY0QcVBA7PKSErXOXcHyQpkZPRXpBBmagQoXKVZaEz8DrXLU= barney@BarneyLaptop"
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCHGmpOxOGR9i3CVE1WMT9hudFQ0nlMR32kGazAQGfcOUu7CH49Au6jC8Yj0q11NwmWJba9Osda9xT6VbjQoCDNcfNutCGHtf1WWgl2VKV91tTyeQ4fxjJsN1pAVkqm37l9qyvK8yLRYzyTmrCpf2lFmHCTB5IsQm0K8Us/0uTccbX1jt0d35VjIfJnwmFbEClQZbD9dOfrAPUVvcSHmw9yrsBYFsxdB1kfXoZwqkOs7uoHBSB+MKXX08u5QiFS9c16arTbA5sOk/0wcdC/1nWYj7ymZ7Co0LD90fwMlApSN3bv3AUcJ9Qxu2OoeHbkSleUy1WqxZw+azakIm/vLCZv rsa-key-20220115"
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDR0Py0dNvD/DkIpHPXMav6Hmg5xix7dkOG4ztP3BqgSnmq8ebioeDBWIDxRIGBUk69RE1TVJ+iVs60l8M58FtVJiMDbuX0R3JgRJNkCaiwmMTlD3IYin/fAqSk/seQGNj4R7YbT8rNLGhzdRcf1ww76t3w6JlfDfER1lSayS4WjxU4s8m3lCi7r8BdwDp8aOnmaU3vlrwne7/OW/ZQD7oHik4IA9f2zFFVQA/PTWmaQuYtxn1SLPRSRon+Gk6G4lULJ9bFFft9qTscZ8DuyCjQS5uA0F+SSJZRspRRDT+BAIesg2Zx2+HrajA1Y7/2NOsuhWAPpK6e/k8fsB8rqbyD pavel@LAPTOP-30GSN6DN"
-  ];
+  
 
   users.users.docker = {
     isSystemUser = true;
@@ -112,10 +110,7 @@
   users.defaultUserShell = pkgs.zsh;
   users.users.root.shell = pkgs.zsh;
   programs.zsh.enable = true;
-  systemd.oomd.enable = true;
-  systemd.extraConfig = ''
-    DefaultTimeoutStopSec=10s
-  '';
+  
 
   # disk automount
   services.devmon.enable = true;

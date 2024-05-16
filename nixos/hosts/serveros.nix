@@ -24,6 +24,9 @@
   };
 
   roles = {
+    plasmaDesktop = {
+      enable = true;
+    };
     docker = {
       enable = true;
     };
@@ -44,6 +47,12 @@
     gaming = {
       enable = true;
     };
+    pipewire = {
+      enable = true;
+    };
+    ssh = {
+      enable = true;
+    };
 
 
     # hyprland = {
@@ -52,8 +61,6 @@
     # desktop = {
     #   enable = true;
     # };
-    plasmaDesktop = {
-      enable = true;
-    };
+    
   };
 }
