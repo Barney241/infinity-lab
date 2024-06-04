@@ -43,7 +43,8 @@ in
       boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
       # Load nvidia driver for Xorg and Wayland
-      services.xserver.videoDrivers = [ "nvidia" ];
+      # services.xserver.videoDrivers = [ "nvidia" ]; # conflict with nvidia-x11
+
       # Nvidia Docker
       virtualisation.docker.enableNvidia = true;
 

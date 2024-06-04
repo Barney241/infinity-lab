@@ -51,8 +51,8 @@ in
               CUDA_PATH = "${cuda}";
               CUDATKDIR = "${cuda}";
               # might set too many things, can be probably simplified
-              LD_LIBRARY_PATH = "/usr/lib/x86_64-linux-gnu:${pkgs.mkl}/lib:${pkgs.libsndfile.out}/lib:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${pkgs.linuxPackages.nvidia_x11}/lib:${cuda}/lib:${cuda.lib}/lib:${cudnn}/lib:$LD_LIBRARY_PATH";
-              EXTRA_LDFLAGS = "-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib";
+              LD_LIBRARY_PATH = "/usr/lib/x86_64-linux-gnu:${pkgs.mkl}/lib:${pkgs.libsndfile.out}/lib:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.zlib}/lib:${config.boot.kernelPackages.nvidia_x11}/lib:${cuda}/lib:${cuda.lib}/lib:${cudnn}/lib:$LD_LIBRARY_PATH";
+              EXTRA_LDFLAGS = "-L/lib -L${config.boot.kernelPackages.nvidia_x11}/lib";
               EXTRA_CCFLAGS = "-I/usr/include";
             };
             argv = [

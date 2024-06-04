@@ -17,21 +17,6 @@ in
       services.teamviewer.enable = true;
       services.ratbagd.enable = true;
 
-      services.pipewire = {
-          enable = true;
-          audio.enable = true;
-          alsa = {
-            enable = true;
-            support32Bit = true;
-          };
-          pulse.enable = true;
-          jack.enable = true;
-          wireplumber = {
-            enable = true;
-          };
-      };
-      sound.enable = false;
-
       fonts.packages = with pkgs; [
           nerdfonts
       ];
@@ -78,7 +63,10 @@ in
 
         
         environment = {
-          plasma6.excludePackages = with pkgs.kdePackages; [ elisa ];
+          plasma6.excludePackages = with pkgs.kdePackages; [ 
+            elisa
+            spectacle   # broken as of now
+          ];
           sessionVariables = {
             GDK_DEBUG = "portals"; # KDE filepicker
             XDG_CURRENT_DESKTOP = "KDE";

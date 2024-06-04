@@ -27,7 +27,7 @@ in
 
     #dev
     slack
-    pkgs.dbeaver
+    pkgs.dbeaver-bin
     postman
     pkgs.vscode
     pkgs.jetbrains-toolbox
