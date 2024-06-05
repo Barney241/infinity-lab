@@ -1,5 +1,5 @@
 # Common config shared among all machines
-{ pkgs, attrs, config, hostName, ... }: {
+{ pkgs, attrs, lib, hostName, ... }: {
   system.stateVersion = "24.05";
 
   imports = [ ./roles ];
@@ -45,14 +45,12 @@
     ];
   };
 
-  # nixpkgs.overlays = [ nixpkgs-wayland.overlay ];
-
   # latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = hostName;
-  # networking.networkmanager.enable = lib.mkDefault true;
-  # services.resolved.enable = true;
+  networking.networkmanager.enable = lib.mkDefault true;
+  services.resolved.enable = true;
 
   environment.systemPackages = with pkgs;[
     iwd
@@ -67,6 +65,7 @@
     curl
     lazydocker
     lazygit
+    delta
     gcc
     unzip
     ripgrep
