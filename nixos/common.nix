@@ -2,7 +2,12 @@
 { pkgs, attrs, lib, hostName, ... }: {
   system.stateVersion = "24.05";
 
-  imports = [ ./roles ];
+  imports = [ 
+    #System  
+    ./components
+    ./desktop-environments
+  ];
+
   nixpkgs = {
     config = {
         allowUnfree = true;
@@ -110,6 +115,7 @@
   users.users.root.shell = pkgs.zsh;
   programs.zsh.enable = true;
   
+  services.earlyoom.enable = true;
 
   # disk automount
   services.devmon.enable = true;

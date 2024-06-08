@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }:
 let
-  cfg = config.roles.desktop;
+  cfg = config.sway;
 in
 {
-  options.roles.desktop = {
+  options.sway = {
     enable = lib.mkOption {
       default = false;
       example = true;
@@ -13,11 +13,6 @@ in
       default = true;
       example = false;
       type = lib.types.bool;
-    };
-    desktop = lib.mkOption {
-      default = "sway";
-      example = "gnome";
-      type = lib.types.str;
     };
   };
 

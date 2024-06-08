@@ -85,7 +85,7 @@
                     home-manager.useGlobalPkgs = true;
                     home-manager.useUserPackages = true;
                     home-manager.users.barney = import node.home;
-                    home-manager.backupFileExtension = "backup";
+                    home-manager.backupFileExtension = "backup1";
                   }
 
                   attrs.vscode-server.nixosModules.default

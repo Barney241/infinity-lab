@@ -1,9 +1,9 @@
 { config, pkgs,attrs, lib, ... }:
 let
-  cfg = config.roles.plasmaDesktop;
+  cfg = config.kde;
 in
 {
-  options.roles.plasmaDesktop = {
+  options.kde = {
     enable = lib.mkOption {
       default = false;
       example = true;

@@ -1,9 +1,9 @@
 { hyprland, config, pkgs, lib, ... }:
 let
-  cfg = config.roles.hyprland;
+  cfg = config.hyprland;
 in
 {
-  options.roles.hyprland = {
+  options.hyprland = {
     enable = lib.mkOption {
       default = false;
       example = true;

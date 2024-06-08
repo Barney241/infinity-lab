@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{  pkgs, ... }:
 
 {
   imports = [
@@ -8,8 +8,7 @@
     ../programs/firefox.nix
     ../programs/alacritty.nix
     ../programs/desktop.nix
-    # ../programs/sway.nix
-    # ../programs/hyprland.nix
+    ../programs/i3.nix
   ];
 
   home.file = {

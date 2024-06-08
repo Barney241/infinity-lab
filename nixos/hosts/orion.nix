@@ -12,7 +12,7 @@
     dev = {
       enable = true;
     };
-    desktop = {
+    sway = {
       enable = true;
     };
     tailscale = {
