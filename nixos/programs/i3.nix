@@ -2,6 +2,7 @@
 {
     imports = [
         ./alacritty.nix
+        ./audio.nix
         ./desktop.nix
         ./rofi.nix
         # ./polybar.nix
@@ -19,12 +20,15 @@
         pkgs.dbus # make dbus-update-activation-environment available in the path
         pkgs.kanshi
         pkgs.mako
-        pkgs.wallutils
-        pkgs.wl-clipboard
         pkgs.libsForQt5.kdeconnect-kde
         pkgs.waypipe
         pkgs.dconf
         pkgs.bash
+        pkgs.alsa-utils
+        pkgs.xfce.xfce4-screenshooter
+        pkgs.xfce.xfce4-power-manager
+        pkgs.xfce.xfce4-clipman-plugin
+        pkgs.pavucontrol
     ];
 
     home.sessionVariables = {
@@ -57,8 +61,8 @@
           polybar-themes = pkgs.fetchFromGitHub {
             owner = "Barney241";
             repo = "polybar-themes";
-            rev = "1e387422b95a9107f2346b8c774d92c62fe793a4";
-            sha256 = "sha256-M5GjdqqgiZSVCDnl4Oln5KOxosY17Oe7Ggc9Kt9JFwI=";
+            rev = "d40dad8d5fff5a50e0feb9771a0620da8335f2b6";
+            sha256 = "sha256-G9ackTRlGjzccXNAhAtrxSnEk89jxEMBXC7kmDuxojw=";
           };
         in
         [
@@ -77,26 +81,133 @@
             # window.border = 0;
 
             gaps = {
-                inner = 7;
-                outer = 2;
+                # inner = 5;
+                # outer = 0;
+                smartGaps = true;
             };
+            modes = {
+                resize = {
+                  Left = "resize shrink width 10 px";
+                  Down = "resize grow height 10 px";
+                  Up = "resize shrink height 10 px";
+                  Right = "resize grow width 10 px";
+
+                  Escape = "mode default";
+                  Return = "mode default";
+                };
+            };
+
+             window = {
+                hideEdgeBorders = "smart";
+             };
 
             keybindings = lib.mkOptionDefault {
-                # "XF86AudioMute" = "exec amixer set Master toggle";
-                # "XF86AudioLowerVolume" = "exec amixer set Master 4%-";
-                # "XF86AudioRaiseVolume" = "exec amixer set Master 4%+";
+                "XF86AudioMute" = "exec amixer set Master toggle";
+                "XF86AudioLowerVolume" = "exec amixer set Master 5%-";
+                "XF86AudioRaiseVolume" = "exec amixer set Master 5%+";
                 "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
+
+                # kill focused window
+                "${modifier}+q" = "kill";
+
+                # start your launcher
                 "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -modi drun -show drun";
                 "${modifier}+Shift+d" = "exec ${pkgs.rofi}/bin/rofi -show window";
-                "${modifier}+Shift+x" = "exec systemctl suspend";
-            };
+
+                "${modifier}+Shift+V" = "exec xfce4-clipman-history";
+                "${modifier}+Shift+S" = "exec pavucontrol";
+
+                # reload the configuration file
+                "${modifier}+Shift+c" = "reload";
+
+                "${modifier}+Shift+e" = "exec xfce4-session-logout";
+
+                "${modifier}+F12" = "exec shutdown now";
+                "${modifier}+Shift+L" = "exec i3lock -f -t -i ~/.config/wallpapers/1328226.png";
+                "${modifier}+shift+return" = "exec thunar";
+                "${modifier}+tab" = "workspace back_and_forth";
+
+                "${modifier}+Control+Left" = "move workspace to output left";
+                "${modifier}+Control+Right" = "move workspace to output right";
+                  #
+                  # Workspaces:
+                  #
+                  # switch to workspace
+                  "${modifier}+1" = "workspace 1";
+                  "${modifier}+2" = "workspace 2";
+                  "${modifier}+3" = "workspace 3";
+                  "${modifier}+4" = "workspace 4";
+                  "${modifier}+5" = "workspace 5";
+                  "${modifier}+6" = "workspace 6";
+                  "${modifier}+7" = "workspace 7";
+                  "${modifier}+8" = "workspace 8";
+                  "${modifier}+9" = "workspace 9";
+                  "${modifier}+0" = "workspace 10";
+                  # move focused container to workspace
+                  "${modifier}+Shift+1" = "move container to workspace 1";
+                  "${modifier}+Shift+2" = "move container to workspace 2";
+                  "${modifier}+Shift+3" = "move container to workspace 3";
+                  "${modifier}+Shift+4" = "move container to workspace 4";
+                  "${modifier}+Shift+5" = "move container to workspace 5";
+                  "${modifier}+Shift+6" = "move container to workspace 6";
+                  "${modifier}+Shift+7" = "move container to workspace 7";
+                  "${modifier}+Shift+8" = "move container to workspace 8";
+                  "${modifier}+Shift+9" = "move container to workspace 9";
+                  "${modifier}+Shift+0" = "move container to workspace 10";
+
+                  # Layout stuff:
+                  #
+                  # You can "split" the current object of your focus with
+                  # $mod+b or $mod+v, for horizontal and vertical splits
+                  # respectively.
+                  "${modifier}+b" = "splith";
+                  "${modifier}+v" = "splitv";
+                  "${modifier}+t" = "tabbed";
+
+                  # Switch the current container between different layout styles
+                  "${modifier}+s" = "layout stacking";
+                  "${modifier}+w" = "layout tabbed";
+                  "${modifier}+e" = "layout toggle split";
+
+                  # Make the current focus fullscreen
+                  "F11" = "fullscreen";
+                  "${modifier}+Shift+f" = "fullscreen";
+
+                  # Toggle the current focus between tiling and floating mode
+                  "${modifier}+Shift+space" = "floating toggle";
+
+                  # Swap focus between the tiling area and the floating area
+                  "${modifier}+Mod1+space" = "focus mode_toggle";
+
+                  # move focus to the parent container
+                  "${modifier}+a" = "focus parent";
+                  #
+                  # Scratchpad:
+                  #
+                  # Sway has a "scratchpad", which is a bag of holding for windows.
+                  # You can send windows there and get them back later.
+
+                  # Move the currently focused window to the scratchpad
+                  "${modifier}+Shift+minus" = "move scratchpad";
+
+                  # Show the next scratchpad window or hide the focused scratchpad window.
+                  # If there are multiple scratchpad windows, this command cycles through them.
+                  "${modifier}+minus" = "scratchpad show";
+        };
 
             startup = [
-                {
-                  command = "exec i3-msg workspace 1";
-                  always = true;
-                  notification = false;
-                }
+                # browser
+                { command = "firefox"; }
+
+                { command = "spotify"; }
+
+                #clipboard manager
+                { command = "xfce4-clipman"; }
+                #power manager
+                { command = "xfce4-power-manager"; }
+
+                # audio
+                { command = "playerctld daemon"; }
                 # {
                 #   command = "systemctl --user restart polybar.service";
                 #   always = true;

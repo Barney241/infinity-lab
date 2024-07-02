@@ -20,7 +20,15 @@ in
             security.rtkit.enable = true;
             services.blueman.enable = true;
 
+            services.libinput.mouse.middleEmulation = false; #this doesnt work needs xserver for now
+            services.xserver.libinput.mouse.middleEmulation = false;
+            services.libinput.touchpad.middleEmulation = false;
+            # services.xserver.libinput.mouse.additionalOptions = ''
+                # Option "MiddleEmulationEnabled" "0"
+            # '';
+
             programs.dconf.enable = true;
+            programs.thunar.enable = true;
 
             fonts.packages = with pkgs; [
                 nerdfonts
@@ -32,7 +40,7 @@ in
 
               xkb = {
                 variant = "";
-                layout = "us";
+                layout = "us,cz";
               };
               windowManager.i3 = {
                 enable = true;

@@ -12,7 +12,7 @@
         ]}
 
         if type "xrandr"; then
-          for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+          for m in $(polybar -m | cut -d ':' -f 1); do
             MONITOR=$m polybar -q -r main -c ~/.config/polybar/colorblocks/config.ini &
           done
         else

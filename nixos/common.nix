@@ -123,6 +123,8 @@
   services.udisks2.enable = true;
   services.fwupd.enable = true;
 
+  services.libinput.mouse.middleEmulation = false;
+
   # age.secrets = {
   #   influxdb-telegraf.file = ./secrets/influxdb-telegraf.age;
   #   tailscale.file = ./secrets/tailscale.age;
