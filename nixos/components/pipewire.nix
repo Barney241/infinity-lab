@@ -26,6 +26,5 @@ in
             enable = true;
           };
       };
-      sound.enable = false;
    };
 }

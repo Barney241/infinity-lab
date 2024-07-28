@@ -11,24 +11,10 @@ in
     {
       services.xserver.enable = true;
       services.xserver.videoDrivers = [ "amdgpu" ];
-      # Enable OpenGL
-      hardware.opengl = {
+
+      hardware.graphics = {
         enable = true;
-
-        ## radv: an open-source Vulkan driver from freedesktop
-        driSupport = true;
-        driSupport32Bit = true;
-
-        ## amdvlk: an open-source Vulkan driver from AMD
-        extraPackages = [
-          # pkgs.amdvlk
-          # pkgs.rocm-opencl-runtime
-          pkgs.rocm-opencl-icd
-          # pkgs.rocmPackages.rocm-runtime
-        ];
-        extraPackages32 = [
-          # pkgs.driversi686Linux.amdvlk
-        ];
+        enable32Bit = true;
       };
 
       boot.initrd.kernelModules = [ "amdgpu" ];

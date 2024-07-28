@@ -51,9 +51,9 @@ in
     pkgs.bitwarden
     pkgs.solaar #logitech
     pkgs.notion-app-enhanced
-    pkgs.gnome.gnome-calculator
-    pkgs.gnome.gnome-disk-utility
-    pkgs.gnome.gnome-terminal
+    pkgs.gnome-calculator
+    pkgs.gnome-disk-utility
+    pkgs.gnome-terminal
     pkgs.libreoffice
     pkgs.piper
     pkgs.polychromatic #razer

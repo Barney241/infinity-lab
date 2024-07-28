@@ -26,7 +26,6 @@
         pkgs.bash
         pkgs.alsa-utils
         pkgs.xfce.xfce4-screenshooter
-        pkgs.xfce.xfce4-power-manager
         pkgs.xfce.xfce4-clipman-plugin
         pkgs.pavucontrol
     ];
@@ -115,6 +114,7 @@
                 "${modifier}+Shift+d" = "exec ${pkgs.rofi}/bin/rofi -show window";
 
                 "${modifier}+Shift+V" = "exec xfce4-clipman-history";
+                "${modifier}+Shift+P" = "exec xfce4-clipman-history";
                 "${modifier}+Shift+S" = "exec pavucontrol";
 
                 # reload the configuration file
@@ -201,10 +201,10 @@
 
                 { command = "spotify"; }
 
+                { command = "slack"; }
+
                 #clipboard manager
                 { command = "xfce4-clipman"; }
-                #power manager
-                { command = "xfce4-power-manager"; }
 
                 # audio
                 { command = "playerctld daemon"; }
