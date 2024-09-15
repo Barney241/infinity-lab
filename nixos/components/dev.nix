@@ -13,11 +13,14 @@ in
         bash
         doctl
         postgresql_16
+
         kubectl
+        kdash # kubernetes dashboard
+
         nil
         rustup
         # go
-        go_1_22
+        go_1_23
         natscli
 
         #rust
@@ -35,13 +38,12 @@ in
         cachix
         gnumake
         docker-compose
-        jetbrains.jdk
-        jetbrains.goland
-        jetbrains.idea-ultimate
+        # jetbrains.jdk
+        # jetbrains.goland
+        # jetbrains.idea-ultimate
         # jetbrains.pycharm-professional
         # jetbrains.phpstorm
         # jetbrains.webstorm
-        liquibase
         # poetry
       ];
 

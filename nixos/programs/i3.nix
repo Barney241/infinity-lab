@@ -27,6 +27,7 @@
         pkgs.alsa-utils
         pkgs.xfce.xfce4-screenshooter
         pkgs.xfce.xfce4-clipman-plugin
+        pkgs.xfce.xfce4-notifyd
         pkgs.pavucontrol
     ];
 
@@ -197,22 +198,15 @@
 
             startup = [
                 # browser
-                { command = "firefox"; }
+                # { command = "firefox"; }
 
                 { command = "spotify"; }
 
                 { command = "slack"; }
 
-                #clipboard manager
-                { command = "xfce4-clipman"; }
-
                 # audio
                 { command = "playerctld daemon"; }
-                # {
-                #   command = "systemctl --user restart polybar.service";
-                #   always = true;
-                #   notification = false;
-                # }
+
                 {
                   command = "${pkgs.feh}/bin/feh --bg-scale --randomize ~/.config/wallpapers/*";
                   always = true;

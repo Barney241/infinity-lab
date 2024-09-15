@@ -34,8 +34,8 @@ in
         wineWowPackages.staging
         winetricks
         wineWowPackages.waylandFull
-        vkd3d
-        vkdt-wayland
+        # vkd3d #broken
+        # vkdt-wayland #broken
         dxvk
         q4wine # testing
         bottles # testing

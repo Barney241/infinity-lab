@@ -41,7 +41,7 @@
             enable = true;
         };
         jupyter = {
-            enable = false;
+            enable = false; # dependecy failure
         };
         gaming = {
             enable = true;
