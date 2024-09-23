@@ -1,4 +1,4 @@
-{ lib, config, pkgs, modulesPath, ... }:
+    { lib, pkgs, config, ... }:
 {
 
   boot.loader = {
@@ -24,13 +24,15 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  environment.systemPackages = [ pkgs.cifs-utils ];
 
-  boot.swraid ={
-      enable=true;
-      mdadmConf=''
-ARRAY /dev/md/0 level=raid1 num-devices=2 metadata=1.2 name=serveros:0 UUID=8970de53:9de3073d:ed05029f:0f95ecc9
-   devices=/dev/sdb1,/dev/sdc1
-    '';
+  # needed for mounting to non-root users
+  security.wrappers."mount.cifs" = {
+      program = "mount.cifs";
+      source = "${lib.getBin pkgs.cifs-utils}/bin/mount.cifs";
+      owner = "root";
+      group = "root";
+      setuid = true;
   };
 
   fileSystems = {
@@ -39,12 +41,13 @@ ARRAY /dev/md/0 level=raid1 num-devices=2 metadata=1.2 name=serveros:0 UUID=8970
       fsType = "ext4";
     };
     "/media" = {
-      device = "/dev/disk/by-uuid/06954c4a-6f63-413d-a607-82a491099466";
-      fsType = "ext4";
-    };
-    "/disks/raid1" = {
-      device = "/dev/disk/by-uuid/06954c4a-6f63-413d-a607-82a491099466";
-      fsType = "ext4";
+        device="//192.168.18.122/media";
+        fsType="cifs";
+        options = let
+        # this line prevents hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+
+      in ["${automount_opts},credentials=/home/barney/nas-serveros-secrets,uid=${toString config.users.users.docker.uid},gid=${toString config.users.groups.docker.gid}"];
     };
     "/disks/hdd_backup" = {
       device = "/dev/disk/by-uuid/e891b814-1ce9-4448-b979-f20f6ff0221e";
@@ -53,7 +56,7 @@ ARRAY /dev/md/0 level=raid1 num-devices=2 metadata=1.2 name=serveros:0 UUID=8970
      "/efi" = {
        device = "/dev/disk/by-uuid/EBAD-07A2";
        fsType = "vfat";
-    };  
+    };
   };
 
   swapDevices = [ {
@@ -70,8 +73,6 @@ ARRAY /dev/md/0 level=raid1 num-devices=2 metadata=1.2 name=serveros:0 UUID=8970
   # networking.interfaces.ens3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-
-  # swapDevices = [{ device = "/swapfile"; size = 16382; }];
 
   gpus.nvidia.enable = true;
 

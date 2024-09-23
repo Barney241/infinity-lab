@@ -39,8 +39,6 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
 
-    vscode-server.url = "github:nix-community/nixos-vscode-server";
-
     zig.url = "github:mitchellh/zig-overlay";
     zig.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -87,11 +85,6 @@
                     home-manager.users.barney = import node.home;
                     home-manager.backupFileExtension = "backup1";
                   }
-
-                  attrs.vscode-server.nixosModules.default
-                  ({ config, pkgs, ... }: {
-                    services.vscode-server.enable = true;
-                  })
                 ];
               })
             catalog.nodes;

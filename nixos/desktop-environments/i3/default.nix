@@ -16,6 +16,10 @@ in
       {
             environment.pathsToLink = [ "/libexec" ];
 
+            environment.xfce.excludePackages = [
+                pkgs.xfce.xfce4-power-manager
+            ];
+
             services.gvfs.enable = true;
             security.rtkit.enable = true;
             services.blueman.enable = true;
