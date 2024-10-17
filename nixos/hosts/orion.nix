@@ -5,6 +5,8 @@
   ];
   networking.hostName = "orion";
 
+  hyprland.enable = true;
+
   roles = {
     docker = {
       enable = true;
@@ -12,11 +14,22 @@
     dev = {
       enable = true;
     };
-    sway = {
-      enable = true;
+    lsp = {
+        go = true;
+        rust = true;
+        zig = false;
     };
     tailscale = {
-      enable = true;
+        enable = true;
+    };
+    gaming = {
+        enable = true;
+    };
+    pipewire = {
+        enable = true;
+    };
+    ssh = {
+        enable = true;
     };
   };
 }

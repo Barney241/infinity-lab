@@ -35,7 +35,7 @@
         lsp = {
             go = true;
             rust = true;
-            zig = true;
+            zig = false;
         };
         tailscale = {
             enable = true;

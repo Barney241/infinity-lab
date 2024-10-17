@@ -24,30 +24,19 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  environment.systemPackages = [ pkgs.cifs-utils ];
-
-  # needed for mounting to non-root users
-  security.wrappers."mount.cifs" = {
-      program = "mount.cifs";
-      source = "${lib.getBin pkgs.cifs-utils}/bin/mount.cifs";
-      owner = "root";
-      group = "root";
-      setuid = true;
-  };
-
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-uuid/308cf73f-3b53-4b5c-8874-78d4b3ff86c3";
       fsType = "ext4";
     };
     "/media" = {
-        device="//192.168.18.122/media";
-        fsType="cifs";
-        options = let
-        # this line prevents hanging on network split
-        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-
-      in ["${automount_opts},credentials=/home/barney/nas-serveros-secrets,uid=${toString config.users.users.docker.uid},gid=${toString config.users.groups.docker.gid}"];
+        device="192.168.18.122:/volume1/media";
+        fsType="nfs";
+        options = [ 
+        "x-systemd.automount"
+        "noauto"
+        "x-systemd.idle-timeout=600"
+        ];
     };
     "/disks/hdd_backup" = {
       device = "/dev/disk/by-uuid/e891b814-1ce9-4448-b979-f20f6ff0221e";

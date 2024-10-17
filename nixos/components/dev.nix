@@ -40,7 +40,7 @@ in
         docker-compose
         # jetbrains.jdk
         # jetbrains.goland
-        # jetbrains.idea-ultimate
+        jetbrains.idea-ultimate
         # jetbrains.pycharm-professional
         # jetbrains.phpstorm
         # jetbrains.webstorm
