@@ -8,9 +8,10 @@
     ./wofi.nix
     ./waybar.nix
     ./firefox.nix
+    ./kanshi.nix
   ];
 
-  home.file.".config/sway/kill.sh".text = (builtins.readFile ./sway/kill.sh);
+  # home.file.".config/sway/kill.sh".text = (builtins.readFile ./sway/kill.sh);
   home.file.".config/wallpapers".source = (pkgs.fetchFromGitHub {
     owner = "Barney241";
     repo = "desktop-wallpapers";
@@ -34,7 +35,7 @@
 
   home.sessionVariables = {
     XDG_CURRENT_DESKTOP = "sway";
-    NIXOS_OZONE_WL = 1;
+    # NIXOS_OZONE_WL = 1;
     WLR_NO_HARDWARE_CURSORS = "1";
   };
   services.cliphist.enable = true;
@@ -85,13 +86,13 @@
         { command = "firefox"; }
 
         # music
-        { command = "tidal-hifi"; }
+        { command = "spotify"; }
 
         # passwords
-        { command = "bitwarden"; }
+        # { command = "bitwarden"; }
 
         # steam
-        { command = "steam"; }
+        # { command = "steam"; }
 
         # kanshi
         # { command = "exec sleep 5; systemctl --user start kanshi.service"; }
@@ -173,22 +174,25 @@
           # "${modifier}+q" = "exec /barney/home/.config/sway/kill.sh";
 
           # start your launcher
+          "${modifier}+d" = "exec wofi --show drun";
           "${modifier}+shift+d" = "exec wofi --show drun";
 
           # reload the configuration file
-          "${modifier}+Shift+c" = "reload";
+          "${modifier}+Shift+c" = "reload; exec kanshi; exec setrandom -m scale /home/barney/.config/wallpapers";
 
           # clipboard history
           "${modifier}+Shift+V" = "exec cliphist list | wofi -dmenu | cliphist decode | wl-copy";
+          "${modifier}+Shift+P" = "exec cliphist list | wofi -dmenu | cliphist decode | wl-copy";
 
           # Random wallpaper
-          "Mod1+N" = "exec setrandom -m scale /barney/home/.config/wallpapers";
+          "Mod1+N" = "exec setrandom -m scale /home/barney/.config/wallpapers";
 
           # exit sway (logs you out of your Wayland session)
           "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
 
           "${modifier}+F12" = "exec shutdown now";
-          "${modifier}+Control+L" = "exec swaylock -f -i /home/barney/.config/wallpapers/mountains-on-mars.png -s fill";
+          "${modifier}+Control+L" = "exec swaylock -f -i /home/barney/.config/wallpapers/923963.jpg -s fill";
+          "${modifier}+Shift+l" = "exec swaylock -f -i /home/barney/.config/wallpapers/923963.jpg -s fill";
           "${modifier}+shift+return" = "exec thunar";
           "${modifier}+F2" = "exec cantata";
           "${modifier}+F3" = "exec mpv --player-operation-mode=pseudo-gui";
@@ -240,13 +244,8 @@
           "${modifier}+l" = "focus right";
 
           # _move_ the focused window with the same, but add Shift with arrow keys
-          "${modifier}+Shift+h" = "move left";
-          "${modifier}+Shift+j" = "move down";
-          "${modifier}+Shift+k" = "move up";
-          "${modifier}+Shift+l" = "move right";
-
-          "${modifier}+Control+less" = "move workspace to output left";
-          "${modifier}+Control+greater" = "move workspace to output right";
+          "${modifier}+Control+Left" = "move workspace to output left";
+          "${modifier}+Control+Right" = "move workspace to output right";
           #
           # Workspaces:
           #
@@ -334,7 +333,7 @@
       # testing
       exec systemctl --user import-environment
     ''; 
-    extraOptions = ["--unsupported-gpu"];
+    # extraOptions = ["--unsupported-gpu"];
   };
 
 }

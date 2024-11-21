@@ -61,7 +61,7 @@
         network = {
           format-wifi = "直 {signalStrength}%";
           format-ethernet = " wired";
-          # on-click =  "wofi-wifi-menu",
+          on-click =  "alacritty --command nmtui connect";
           format-disconnected = "Disconnected  ";
         };
         pulseaudio = {

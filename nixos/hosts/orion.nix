@@ -5,7 +5,7 @@
   ];
   networking.hostName = "orion";
 
-  hyprland.enable = true;
+  sway.enable = true;
 
   roles = {
     docker = {

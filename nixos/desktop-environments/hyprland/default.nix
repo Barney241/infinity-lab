@@ -16,7 +16,7 @@ in
       environment.systemPackages = with pkgs; [
         greetd.tuigreet
       ];
-      services.greetd = {
+       services.greetd = {
         enable = true;
         settings = {
           default_session = {

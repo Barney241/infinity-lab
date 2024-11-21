@@ -8,5 +8,6 @@
     ../programs/firefox.nix
     ../programs/alacritty.nix
     ../programs/desktop.nix
+    ../programs/sway.nix
   ];
 }
