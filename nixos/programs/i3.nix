@@ -124,7 +124,7 @@
                 "${modifier}+Shift+e" = "exec xfce4-session-logout";
 
                 "${modifier}+F12" = "exec shutdown now";
-                "${modifier}+Shift+L" = "exec i3lock -f -t -i ~/.config/wallpapers/1328226.png";
+                "${modifier}+Shift+L" = "exec xflock4";
                 "${modifier}+shift+return" = "exec thunar";
                 "${modifier}+tab" = "workspace back_and_forth";
 
