@@ -32,7 +32,7 @@ in
         rustup
         
         #lsp
-        buf-language-server
+        buf
 
         nodejs_20
         cachix
