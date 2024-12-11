@@ -21,7 +21,7 @@ in
       {
         security.rtkit.enable = true;
         security.pam.services.swaylock = { };
-        sound.enable = true;
+        # sound.enable = true;
 
         programs.xwayland.enable = true;
         services.blueman.enable = true;
@@ -133,7 +133,7 @@ in
         };
         
         services.xserver = {
-          videoDrivers = [ "nvidia" ];
+          # videoDrivers = [ "nvidia" ];
           displayManager.gdm.wayland = true;
         };
 

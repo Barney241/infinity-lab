@@ -31,6 +31,7 @@
     pkgs.dconf
     pkgs.swaylock
     pkgs.swayidle
+    pkgs.brightnessctl
   ];
 
   home.sessionVariables = {
