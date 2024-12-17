@@ -49,46 +49,40 @@
 
   outputs = { self, nixpkgs, nur, flake-utils, home-manager, ... }@attrs:
     let
-      inherit (nixpkgs.lib)
-        mapAttrs mapAttrs' nixosSystem;
+      inherit (nixpkgs.lib) mapAttrs mapAttrs' nixosSystem;
 
       inherit (flake-utils.lib) eachSystemMap system;
 
       # catalog.nodes defines the systems available in this flake.
       catalog = import ./nixos/catalog.nix { inherit system; };
-    in
-    rec {
+    in rec {
       # Convert nodes into a set of nixos configs.
-      nixosConfigurations =
-        let
-          # Bare metal systems.
-          metalSystems = mapAttrs
-            (host: node:
-              nixosSystem {
-                inherit (node) system;
-                specialArgs = attrs // {
-                  inherit catalog;
-                  inherit attrs;
-                  hostName = host;
-                  zig = attrs.zig.packages.${node.system};
-                  zls = attrs.zls.packages.${node.system};
-                };
-                modules = [
-                  nur.nixosModules.nur
-                  attrs.chaotic.nixosModules.default
-                  node.config
-                  node.hw
-                  home-manager.nixosModules.home-manager
-                  {
-                    home-manager.useGlobalPkgs = true;
-                    home-manager.useUserPackages = true;
-                    home-manager.users.barney = import node.home;
-                    home-manager.backupFileExtension = "backup1";
-                  }
-                ];
-              })
-            catalog.nodes;
-        in
-        metalSystems;
+      nixosConfigurations = let
+        # Bare metal systems.
+        metalSystems = mapAttrs (host: node:
+          nixosSystem {
+            inherit (node) system;
+            specialArgs = attrs // {
+              inherit catalog;
+              inherit attrs;
+              hostName = host;
+              zig = attrs.zig.packages.${node.system};
+              zls = attrs.zls.packages.${node.system};
+            };
+            modules = [
+              nur.modules.nixos.default
+              attrs.chaotic.nixosModules.default
+              node.config
+              node.hw
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users.barney = import node.home;
+                home-manager.backupFileExtension = "backup1";
+              }
+            ];
+          }) catalog.nodes;
+      in metalSystems;
     };
 }

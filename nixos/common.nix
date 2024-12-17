@@ -2,7 +2,7 @@
 { pkgs, attrs, lib, hostName, ... }: {
   system.stateVersion = "24.05";
 
-  imports = [ 
+  imports = [
     #System  
     ./components
     ./desktop-environments
@@ -10,13 +10,11 @@
 
   nixpkgs = {
     config = {
-        allowUnfree = true;
-        allowBroken = false;
-        permittedInsecurePackages = [
-          "electron-25.9.0"
-        ];
+      allowUnfree = true;
+      allowBroken = false;
+      permittedInsecurePackages = [ "electron-25.9.0" ];
     };
-    overlays = [ attrs.nur.overlay ];
+    overlays = [ attrs.nur.overlays.default ];
   };
 
   # Garbage collect & optimize /nix/store daily.
@@ -27,10 +25,7 @@
   };
   nix.optimise.automatic = true;
   nix.settings = {
-    experimental-features = [ 
-      "nix-command"
-      "flakes" 
-    ];
+    experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
     substituters = [
       "https://nyx.chaotic.cx"
@@ -57,7 +52,7 @@
   networking.networkmanager.enable = lib.mkDefault true;
   services.resolved.enable = true;
 
-  environment.systemPackages = with pkgs;[
+  environment.systemPackages = with pkgs; [
     iwd
     git
     tmux
@@ -81,40 +76,32 @@
     spaceship-prompt
   ];
 
-  environment.sessionVariables = {
-    EDITOR = "nvim";
-  };
-  
-  
+  environment.sessionVariables = { EDITOR = "nvim"; };
+
   time.timeZone = "Europe/Prague";
 
   security.polkit.enable = true;
- 
+
   users.mutableUsers = true;
   users.users.barney = {
     isNormalUser = true;
     home = "/home/barney";
     description = "barney";
-    extraGroups = [ 
-      "wheel"
-      "gamemode"
-    ];
+    extraGroups = [ "wheel" "gamemode" ];
     initialPassword = "test";
   };
-  
 
   users.users.docker = {
     isSystemUser = true;
-    uid=1001;
-    group="wheel";
+    uid = 1001;
+    group = "wheel";
   };
-
 
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
   users.users.root.shell = pkgs.zsh;
   programs.zsh.enable = true;
-  
+
   services.earlyoom.enable = true;
 
   # disk automount
