@@ -11,8 +11,7 @@ let
         --add-flags "--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer"
     '';
   });
-in
-{
+in {
   home.packages = [
     pkgs.libsForQt5.kdeconnect-kde
 
@@ -22,7 +21,7 @@ in
     pkgs.postman
     pkgs.vscode
     # pkgs.jetbrains-toolbox
-    pkgs.resp-app #redis client
+    pkgs.resp-app # redis client
 
     #social
     pkgs.caprine-bin
@@ -39,18 +38,18 @@ in
     #system apps
     pkgs.bitwarden-cli
     pkgs.bitwarden
-    pkgs.solaar #logitech
+    pkgs.solaar # logitech
     pkgs.gnome-calculator
     pkgs.gnome-disk-utility
     pkgs.gnome-terminal
     pkgs.libreoffice
     pkgs.piper
-    pkgs.polychromatic #razer
+    pkgs.polychromatic # razer
 
     #remote desktop
     pkgs.teamviewer
     # pkgs.rustdesk #not working atm
   ];
 
-  services.blueman-applet.enable = true;
+  # services.blueman-applet.enable = true;
 }
