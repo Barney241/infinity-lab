@@ -20,7 +20,6 @@ in {
       steam
       steam-run
       lutris
-      prismlauncher
       xorg.xinput
       (lutris.override {
         extraPkgs = pkgs: [
@@ -30,13 +29,9 @@ in {
         ];
       })
       wine
-      wineWowPackages.staging
       winetricks
-      wineWowPackages.waylandFull
-      # vkd3d #broken
-      # vkdt-wayland #broken
+      # wineWowPackages.waylandFull
       dxvk
-      q4wine # testing
       # bottles # testing
     ];
 

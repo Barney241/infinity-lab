@@ -1,5 +1,4 @@
-{ config, lib, pkgs, ... }:
-{
+{ config, lib, pkgs, ... }: {
   imports = [
     ./alacritty.nix
     ./audio.nix
@@ -19,7 +18,7 @@
     hash = "sha256-avBC0jiXfInhH9avVcyKtNQudXeP7THJkw9QpnBONbA=";
   });
 
- home.packages = [
+  home.packages = [
     pkgs.dbus # make dbus-update-activation-environment available in the path
     pkgs.kanshi
     pkgs.mako
@@ -71,23 +70,39 @@
         { command = "mako"; }
         { command = "slack"; }
         { command = "setrandom -m scale /home/barney/.config/wallpapers"; }
-        { command = "alacritty"; }
+        {
+          command = "alacritty";
+        }
 
         ## cliphist
-        { command = "wl-paste --type text --watch cliphist store #Stores only text data"; }
-        { command = "wl-paste --type image --watch cliphist store #Stores only image data"; }
+        {
+          command =
+            "wl-paste --type text --watch cliphist store #Stores only text data";
+        }
+        {
+          command =
+            "wl-paste --type image --watch cliphist store #Stores only image data";
+        }
 
         # waybar
-        { command = "waybar"; }
+        {
+          command = "waybar";
+        }
 
         # audio
-        { command = "playerctld daemon"; }
+        {
+          command = "playerctld daemon";
+        }
 
         # browser
-        { command = "firefox"; }
+        {
+          command = "firefox";
+        }
 
         # music
-        { command = "spotify"; }
+        {
+          command = "spotify";
+        }
 
         # passwords
         # { command = "bitwarden"; }
@@ -114,6 +129,7 @@
       input = {
         "*" = {
           xkb_layout = "us,cz";
+          xkb_variant = ",qwerty";
           xkb_options = "grp:win_space_toggle";
         };
       };
@@ -129,27 +145,19 @@
         commands = [
           {
             command = "floating enable";
-            criteria = {
-              class = "xdg-desktop-portal-kde";
-            };
+            criteria = { class = "xdg-desktop-portal-kde"; };
           }
           {
             command = "floating enable";
-            criteria = {
-              class = "lutri";
-            };
+            criteria = { class = "lutri"; };
           }
           {
             command = "move to scratchpad";
-            criteria = {
-              class = "notion-app-enhanced";
-            };
+            criteria = { class = "notion-app-enhanced"; };
           }
           {
             command = "move to scratchpad";
-            criteria = {
-              title = "^TIDAL$";
-            };
+            criteria = { title = "^TIDAL$"; };
           }
         ];
       };
@@ -163,10 +171,8 @@
         };
       };
       keybindings =
-        let
-          modifier = config.wayland.windowManager.sway.config.modifier;
-        in
-        lib.mkOptionDefault {
+        let modifier = config.wayland.windowManager.sway.config.modifier;
+        in lib.mkOptionDefault {
           # start a terminal
           "${modifier}+Return" = "exec alacritty";
 
@@ -179,21 +185,27 @@
           "${modifier}+shift+d" = "exec wofi --show drun";
 
           # reload the configuration file
-          "${modifier}+Shift+c" = "reload; exec kanshi; exec setrandom -m scale /home/barney/.config/wallpapers";
+          "${modifier}+Shift+c" =
+            "reload; exec kanshi; exec setrandom -m scale /home/barney/.config/wallpapers";
 
           # clipboard history
-          "${modifier}+Shift+V" = "exec cliphist list | wofi -dmenu | cliphist decode | wl-copy";
-          "${modifier}+Shift+P" = "exec cliphist list | wofi -dmenu | cliphist decode | wl-copy";
+          "${modifier}+Shift+V" =
+            "exec cliphist list | wofi -dmenu | cliphist decode | wl-copy";
+          "${modifier}+Shift+P" =
+            "exec cliphist list | wofi -dmenu | cliphist decode | wl-copy";
 
           # Random wallpaper
           "Mod1+N" = "exec setrandom -m scale /home/barney/.config/wallpapers";
 
           # exit sway (logs you out of your Wayland session)
-          "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
+          "${modifier}+Shift+e" =
+            "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
 
           "${modifier}+F12" = "exec shutdown now";
-          "${modifier}+Control+L" = "exec swaylock -f -i /home/barney/.config/wallpapers/923963.jpg -s fill";
-          "${modifier}+Shift+l" = "exec swaylock -f -i /home/barney/.config/wallpapers/923963.jpg -s fill";
+          "${modifier}+Control+L" =
+            "exec swaylock -f -i /home/barney/.config/wallpapers/923963.jpg -s fill";
+          "${modifier}+Shift+l" =
+            "exec swaylock -f -i /home/barney/.config/wallpapers/923963.jpg -s fill";
           "${modifier}+shift+return" = "exec thunar";
           "${modifier}+F2" = "exec cantata";
           "${modifier}+F3" = "exec mpv --player-operation-mode=pseudo-gui";
@@ -203,7 +215,7 @@
           "${modifier}+F7" = "exec notify-send $(weather)";
           "${modifier}+F8" = "exec pkill kmousetool || kmousetool";
           "${modifier}+shift+F4" = "exec firefox --private-window";
-          "Print" = "exec grim -g \"$(slurp)\" - | swappy -f -";
+          "Print" = ''exec grim -g "$(slurp)" - | swappy -f -'';
           "Control+Print" = "exec grim - | swappy -f -";
           "${modifier}+tab" = "workspace back_and_forth";
 
@@ -213,9 +225,12 @@
 
           # Pulse Audio controls
           # not working
-          "--locked XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume 0 +5%"; #increase sound volume
-          "--locked XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume 0 -5%"; #decrease sound volume
-          "--locked XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute 0 toggle"; # mute sound
+          "--locked XF86AudioRaiseVolume" =
+            "exec --no-startup-id pactl set-sink-volume 0 +5%"; # increase sound volume
+          "--locked XF86AudioLowerVolume" =
+            "exec --no-startup-id pactl set-sink-volume 0 -5%"; # decrease sound volume
+          "--locked XF86AudioMute" =
+            "exec --no-startup-id pactl set-sink-mute 0 toggle"; # mute sound
           # Media --locked player controls
           "--locked XF86AudioPlay" = "exec playerctl play-pause";
           "--locked XF86AudioNext" = "exec playerctl next";
@@ -333,7 +348,7 @@
 
       # testing
       exec systemctl --user import-environment
-    ''; 
+    '';
     # extraOptions = ["--unsupported-gpu"];
   };
 

@@ -34,19 +34,14 @@ in {
       pkgs.grim
       pkgs.swappy
       pkgs.slurp
-      pkgs.libreoffice
       pkgs.wallutils
 
-      pkgs.ledger-live-desktop # testing
       pkgs.yubioath-flutter # testing
       pkgs.pcsclite # testing
       pkgs.pulseaudio # testing
       pkgs.alsa-utils # testing
       pkgs.helvum # testing
 
-      pkgs.obsidian # testing
-      pkgs.appflowy # testing
-      pkgs.floorp # testing
       pkgs.simple-scan # testing
       pkgs.affine # testing
     ];

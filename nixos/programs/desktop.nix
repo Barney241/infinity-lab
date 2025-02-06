@@ -44,7 +44,7 @@ in {
     pkgs.gnome-terminal
     pkgs.libreoffice
     pkgs.piper
-    pkgs.polychromatic # razer
+    # pkgs.polychromatic #razer
 
     #remote desktop
     pkgs.teamviewer
