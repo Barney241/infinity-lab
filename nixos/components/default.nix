@@ -9,5 +9,6 @@
     ./tailscale.nix
     ./pipewire.nix
     ./ssh.nix
+    ./ai.nix
   ];
 }

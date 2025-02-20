@@ -58,6 +58,7 @@
     tmux
     tmux-sessionizer
     htop
+    btop
     jq
     neovim-unwrapped
     tree

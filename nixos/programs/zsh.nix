@@ -1,5 +1,4 @@
-{ config, lib, pkgs, ... }:
-{
+{ config, lib, pkgs, ... }: {
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
@@ -23,7 +22,8 @@
       # nix
       ns = "nix-shell shell.nix";
       nd = "nix develop";
-      nixos-full-upgrade = "sudo mv ~/Projects/infinity-lab/flake.lock ~/Projects/infinity-lab/flake.lock.backup && nix-collect-garbage && sudo nixos-rebuild switch";
+      nixos-full-upgrade =
+        "sudo nix flake update && nix-collect-garbage && sudo nixos-rebuild switch";
       # kubectl
       k = "kubectl";
     };
