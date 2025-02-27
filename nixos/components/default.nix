@@ -10,5 +10,6 @@
     ./pipewire.nix
     ./ssh.nix
     ./ai.nix
+    ./ios.nix
   ];
 }
