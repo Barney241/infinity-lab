@@ -26,6 +26,7 @@ in {
     #social
     pkgs.caprine-bin
     pkgs.teamspeak5_client
+    pkgs.teamspeak3
 
     #browsers
     pkgs.google-chrome

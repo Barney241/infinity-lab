@@ -16,7 +16,7 @@ in {
 
     services.gvfs.enable = true;
     security.rtkit.enable = true;
-    services.blueman.enable = true;
+    services.blueman.enable = false;
 
     services.libinput.mouse.middleEmulation =
       false; # this doesnt work needs xserver for now
@@ -65,7 +65,7 @@ in {
       serviceConfig = {
         Type = "simple";
         ExecStart =
-          "${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
+          "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1";
         Restart = "on-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;
