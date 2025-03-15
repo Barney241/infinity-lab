@@ -1,5 +1,4 @@
-{ lib, config, pkgs, modulesPath, ... }:
-{
+{ lib, config, pkgs, modulesPath, ... }: {
   boot.kernel.sysctl = {
     # Note that inotify watches consume 1kB on 64-bit machines.
     "fs.inotify.max_user_watches" = 1024000; # default:  8192
@@ -11,22 +10,17 @@
     "net.core.somaxconn" = 8192;
     "net.ipv4.tcp_slow_start_after_idle" = 0;
   };
-  boot.kernelParams = [
-    "loglevel=0"
-    "nmi_watchdog=0"
-    "nowatchdog"
-  ];
+  boot.kernelParams = [ "loglevel=0" "nmi_watchdog=0" "nowatchdog" ];
 
   systemd.oomd.enable = true;
   systemd.extraConfig = ''
     DefaultTimeoutStopSec=10s
+    DefaultLimitNOFILE=4096:1048576
   '';
 
   hardware.enableAllFirmware = lib.mkDefault true;
   hardware.enableRedistributableFirmware = lib.mkDefault true;
   hardware.ledger.enable = lib.mkDefault true;
 
-  imports = [
-    ./gpu/default.nix
-  ];
+  imports = [ ./gpu/default.nix ];
 }
