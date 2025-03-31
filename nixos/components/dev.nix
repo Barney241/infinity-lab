@@ -41,6 +41,7 @@ in
         # jetbrains.jdk
         # jetbrains.goland
         jetbrains.idea-ultimate
+        code-cursor
         # jetbrains.pycharm-professional
         # jetbrains.phpstorm
         # jetbrains.webstorm
