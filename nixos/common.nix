@@ -69,6 +69,8 @@
     delta
     gcc
     unzip
+    zip
+    sshfs
     ripgrep
     fwupd
     pciutils
