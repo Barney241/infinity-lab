@@ -1,4 +1,4 @@
-{ config, pkgs, lib, zls, zig, ... }:
+{ config, pkgs, lib, ... }:
 let
   cfg = config.roles.lsp;
   gow = pkgs.callPackage ../../apps/gow.nix { };
@@ -6,7 +6,6 @@ in {
   options.roles.lsp = {
     go = lib.mkEnableOption "go language";
     rust = lib.mkEnableOption "rust language";
-    zig = lib.mkEnableOption "zig language";
   };
 
   config = lib.mkMerge [
@@ -21,7 +20,5 @@ in {
       environment.systemPackages =
         [ pkgs.cargo-watch pkgs.rust-analyzer pkgs.pkg-config pkgs.openssl ];
     })
-
-    (lib.mkIf cfg.zig { environment.systemPackages = [ zls.zls zig.master ]; })
   ];
 }

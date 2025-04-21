@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
   imports = [
-    ./alacritty.nix
+    ./ghostty.nix
     ./audio.nix
     ./desktop.nix
     ./mako.nix
@@ -8,6 +8,8 @@
     ./waybar.nix
     ./firefox.nix
     ./kanshi.nix
+    ./himalaya.nix
+    ./superfile.nix
   ];
 
   # home.file.".config/sway/kill.sh".text = (builtins.readFile ./sway/kill.sh);
@@ -64,14 +66,14 @@
     config = {
       modifier = "Mod4";
       # Use kitty as default terminal
-      terminal = "alacritty";
+      terminal = "ghostty";
       startup = [
         { command = "kdeconnect-indicator"; }
         { command = "mako"; }
         { command = "slack"; }
         { command = "setrandom -m scale /home/barney/.config/wallpapers"; }
         {
-          command = "alacritty";
+          command = "ghostty";
         }
 
         ## cliphist
@@ -174,7 +176,7 @@
         let modifier = config.wayland.windowManager.sway.config.modifier;
         in lib.mkOptionDefault {
           # start a terminal
-          "${modifier}+Return" = "exec alacritty";
+          "${modifier}+Return" = "exec ghostty";
 
           # kill focused window
           "${modifier}+q" = "kill";

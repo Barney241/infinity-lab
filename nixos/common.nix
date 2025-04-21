@@ -56,7 +56,7 @@
     iwd
     git
     tmux
-    tmux-sessionizer
+    # tmux-sessionizer #testing my own
     htop
     btop
     jq

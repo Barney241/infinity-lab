@@ -26,6 +26,8 @@
         "sudo nix flake update && nix-collect-garbage && sudo nixos-rebuild switch";
       # kubectl
       k = "kubectl";
+
+      tms = "sh ~/.tmux/sessionizer/sessionizer.sh";
     };
 
     # initExtra = ''

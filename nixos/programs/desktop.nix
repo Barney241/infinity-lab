@@ -22,6 +22,7 @@ in {
     pkgs.vscode
     # pkgs.jetbrains-toolbox
     pkgs.resp-app # redis client
+    pkgs.ghostty
 
     #social
     pkgs.caprine-bin

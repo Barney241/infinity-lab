@@ -1,11 +1,13 @@
-{  pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
     ./common.nix
     ../programs/zsh.nix
+    ../programs/tmux.nix
     ../programs/git.nix
     ../programs/firefox.nix
+    ../programs/ghostty.nix
     ../programs/alacritty.nix
     ../programs/desktop.nix
     ../programs/i3.nix

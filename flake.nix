@@ -38,13 +38,6 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
-
-    zig.url = "github:mitchellh/zig-overlay";
-    zig.inputs.nixpkgs.follows = "nixpkgs";
-
-    zls.url = "github:zigtools/zls";
-    zls.inputs.nixpkgs.follows = "nixpkgs";
-    zls.inputs.zig-overlay.follows = "zig";
   };
 
   outputs = { self, nixpkgs, nur, flake-utils, home-manager, ... }@attrs:
@@ -66,8 +59,6 @@
               inherit catalog;
               inherit attrs;
               hostName = host;
-              zig = attrs.zig.packages.${node.system};
-              zls = attrs.zls.packages.${node.system};
             };
             modules = [
               nur.modules.nixos.default

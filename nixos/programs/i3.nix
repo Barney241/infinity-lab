@@ -1,6 +1,6 @@
 { lib, pkgs, ... }: {
   imports = [
-    ./alacritty.nix
+    ./ghostty.nix
     ./audio.nix
     ./desktop.nix
     ./rofi.nix
@@ -72,6 +72,7 @@
 
     config = rec {
       modifier = "Mod4";
+      terminal = "ghostty";
       # bars = [ ];
 
       # window.border = 0;
@@ -99,7 +100,7 @@
         "XF86AudioMute" = "exec amixer set Master toggle";
         "XF86AudioLowerVolume" = "exec amixer set Master 5%-";
         "XF86AudioRaiseVolume" = "exec amixer set Master 5%+";
-        "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
+        "${modifier}+Return" = "exec ${pkgs.ghostty}/bin/ghostty";
 
         # kill focused window
         "${modifier}+q" = "kill";
@@ -196,8 +197,10 @@
 
         { command = "spotify"; }
 
+        { command = "slack"; }
+
         {
-          command = "slack";
+          command = "ghostty";
         }
 
         # audio

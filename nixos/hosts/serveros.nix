@@ -24,7 +24,6 @@
     lsp = {
       go = true;
       rust = true;
-      zig = false;
     };
     tailscale = { enable = true; };
     jupyter = {
