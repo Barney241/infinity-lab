@@ -1,35 +1,40 @@
-{ config, lib, pkgs, ... }:
-{
+{ config, lib, pkgs, ... }: {
   services.mako = {
     enable = true;
-    sort = "-time";
-    layer = "overlay";
-    backgroundColor = "#1f2530";
-    width = 300;
-    height = 110;
-    borderSize = 2;
-    borderColor = "#fb958b";
-    borderRadius = 15;
-    icons = false;
-    maxIconSize = 64;
-    defaultTimeout = 5000;
-    ignoreTimeout = true;
-    font = "monospace 12";
-    markup = true;
-    extraConfig = ''
-      [urgency=low]
-      border-color=#fb958b
+    settings = {
+      # Global settings
+      "global" = {
+        sort = "-time";
+        layer = "overlay";
+        background-color = "#1f2530";
+        width = 300;
+        height = 110;
+        border-size = 2;
+        border-color = "#fb958b";
+        border-radius = 15;
+        icons = false;
+        max-icon-size = 64;
+        default-timeout = 5000;
+        ignore-timeout = true;
+        font = "monospace 12";
+        markup = true;
+      };
 
-      [urgency=normal]
-      border-color=#ebcb8b
+      # Urgency levels
+      "urgency=low" = { border-color = "#fb958b"; };
 
-      [urgency=high]
-      border-color=#eb4d4b
-      default-timeout=0
+      "urgency=normal" = { border-color = "#ebcb8b"; };
 
-      [category=mpd]
-      default-timeout=2000
-      group-by=category
-    '';
+      "urgency=high" = {
+        border-color = "#eb4d4b";
+        default-timeout = 0;
+      };
+
+      # Category-specific settings
+      "category=mpd" = {
+        default-timeout = 2000;
+        group-by = "category";
+      };
+    };
   };
 }
