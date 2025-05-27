@@ -38,6 +38,8 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
+
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
   outputs = { self, nixpkgs, nur, flake-utils, home-manager, ... }@attrs:
@@ -63,6 +65,7 @@
             modules = [
               nur.modules.nixos.default
               attrs.chaotic.nixosModules.default
+              attrs.vscode-server.nixosModules.default
               node.config
               node.hw
               home-manager.nixosModules.home-manager
