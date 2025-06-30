@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, stable, ... }:
 let cfg = config.roles.dev;
 in {
   options.roles.dev = { enable = lib.mkEnableOption "Enable dev tools"; };
@@ -28,6 +28,8 @@ in {
 
       #lsp
       buf
+
+      stable.dbeaver-bin
 
       nodejs_20
       cachix

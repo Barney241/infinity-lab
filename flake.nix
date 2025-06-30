@@ -3,6 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    master.url = "github:NixOS/nixpkgs/master";
+    stable.url = "github:NixOS/nixpkgs/25.05";
 
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
@@ -42,25 +44,45 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
-  outputs = { self, nixpkgs, nur, flake-utils, home-manager, ... }@attrs:
+  outputs = { self, nixpkgs, master, stable, nur, flake-utils, home-manager, ...
+    }@attrs:
     let
-      inherit (nixpkgs.lib) mapAttrs mapAttrs' nixosSystem;
+      inherit (nixpkgs.lib) mapAttrs nixosSystem;
 
-      inherit (flake-utils.lib) eachSystemMap system;
+      inherit (flake-utils.lib) system;
 
       # catalog.nodes defines the systems available in this flake.
       catalog = import ./nixos/catalog.nix { inherit system; };
-    in rec {
+    in {
       # Convert nodes into a set of nixos configs.
       nixosConfigurations = let
         # Bare metal systems.
         metalSystems = mapAttrs (host: node:
-          nixosSystem {
+          let
+            stablePkgs = import stable {
+              inherit (node) system;
+              config = {
+                allowUnfree = true;
+                allowBroken = true;
+                permittedInsecurePackages = [ "electron-25.9.0" ];
+              };
+            };
+            masterPkgs = import master {
+              inherit (node) system;
+              config = {
+                allowUnfree = true;
+                allowBroken = true;
+                permittedInsecurePackages = [ "electron-25.9.0" ];
+              };
+            };
+          in nixosSystem {
             inherit (node) system;
             specialArgs = attrs // {
               inherit catalog;
               inherit attrs;
               hostName = host;
+              stable = stablePkgs;
+              master = masterPkgs;
             };
             modules = [
               nur.modules.nixos.default

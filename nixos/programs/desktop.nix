@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, attrs, ... }:
 let
   slack = pkgs.slack.overrideAttrs (oldAttrs: rec {
     fixupPhase = ''
@@ -17,7 +17,6 @@ in {
 
     #dev
     slack
-    pkgs.dbeaver-bin
     pkgs.postman
     pkgs.vscode
     # pkgs.jetbrains-toolbox
