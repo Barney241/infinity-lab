@@ -98,7 +98,7 @@
 
         # browser
         {
-          command = "firefox";
+          command = "zen";
         }
 
         # music
@@ -203,20 +203,11 @@
           "${modifier}+Shift+e" =
             "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
 
-          "${modifier}+F12" = "exec shutdown now";
           "${modifier}+Control+L" =
             "exec swaylock -f -i /home/barney/.config/wallpapers/923963.jpg -s fill";
           "${modifier}+Shift+l" =
             "exec swaylock -f -i /home/barney/.config/wallpapers/923963.jpg -s fill";
           "${modifier}+shift+return" = "exec thunar";
-          "${modifier}+F2" = "exec cantata";
-          "${modifier}+F3" = "exec mpv --player-operation-mode=pseudo-gui";
-          "${modifier}+F4" = "exec firefox";
-          "${modifier}+F5" = "exec kate";
-          "${modifier}+F6" = "exec lutris";
-          "${modifier}+F7" = "exec notify-send $(weather)";
-          "${modifier}+F8" = "exec pkill kmousetool || kmousetool";
-          "${modifier}+shift+F4" = "exec firefox --private-window";
           "Print" = ''exec grim -g "$(slurp)" - | swappy -f -'';
           "Control+Print" = "exec grim - | swappy -f -";
           "${modifier}+tab" = "workspace back_and_forth";
@@ -242,8 +233,8 @@
           # Lenov --locked  have phone instead of media keys
           "--locked XF86PickupPhone" = "exec playerctl previous";
 
-          "--locked XF86MonBrightnessUp" = "exec brightnessctl set +25";
-          "--locked XF86MonBrightnessDown" = "exec brightnessctl set 25-";
+          "--locked XF86MonBrightnessUp" = "exec brightnessctl set +15%";
+          "--locked XF86MonBrightnessDown" = "exec brightnessctl set 15%-";
 
           #
           # Moving around:

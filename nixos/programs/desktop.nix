@@ -1,36 +1,17 @@
-{ config, lib, pkgs, attrs, ... }:
-let
-  slack = pkgs.slack.overrideAttrs (oldAttrs: rec {
-    fixupPhase = ''
-      sed -i -e 's/,"WebRTCPipeWireCapturer"/,"LebRTCPipeWireCapturer"/' $out/lib/slack/resources/app.asar
-
-      rm $out/bin/slack
-      makeWrapper $out/lib/slack/slack $out/bin/slack \
-        --prefix XDG_DATA_DIRS : $GSETTINGS_SCHEMAS_PATH \
-        --suffix PATH : ${lib.makeBinPath [ pkgs.xdg-utils ]} \
-        --add-flags "--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer"
-    '';
-  });
-in {
+{ pkgs, ... }: {
   home.packages = [
     pkgs.libsForQt5.kdeconnect-kde
 
     #dev
-    slack
     pkgs.postman
     pkgs.vscode
     # pkgs.jetbrains-toolbox
     pkgs.resp-app # redis client
-    pkgs.ghostty
 
     #social
     pkgs.caprine-bin
     pkgs.teamspeak5_client
     pkgs.teamspeak3
-
-    #browsers
-    pkgs.google-chrome
-    pkgs.chromium
 
     #media
     pkgs.vlc

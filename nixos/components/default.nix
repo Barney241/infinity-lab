@@ -1,5 +1,6 @@
 {
   imports = [
+    ./desktop.nix
     ./dev.nix
     ./docker.nix
     ./gaming.nix

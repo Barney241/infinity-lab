@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ ... }: {
   imports = [ ../common.nix ];
   networking = {
     hostName = "serveros";
@@ -19,6 +19,7 @@
   i3.enable = true;
 
   roles = {
+    desktop = { enable = true; };
     docker = { enable = true; };
     dev = { enable = true; };
     lsp = {

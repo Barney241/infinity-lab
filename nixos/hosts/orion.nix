@@ -5,6 +5,7 @@
   sway.enable = true;
 
   roles = {
+    desktop = { enable = true; };
     docker = { enable = true; };
     dev = { enable = true; };
     lsp = {

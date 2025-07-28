@@ -23,6 +23,9 @@
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
 
+    zen-browser.url = "github:youwen5/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+
     nur.url = "github:nix-community/NUR";
 
     nix-gaming.url = "github:fufexan/nix-gaming";
@@ -44,8 +47,8 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
-  outputs = { self, nixpkgs, master, stable, nur, flake-utils, home-manager, ...
-    }@attrs:
+  outputs = { self, nixpkgs, master, stable, nur, flake-utils, home-manager
+    , zen-browser, ... }@attrs:
     let
       inherit (nixpkgs.lib) mapAttrs nixosSystem;
 
@@ -82,6 +85,7 @@
               inherit attrs;
               hostName = host;
               stable = stablePkgs;
+              zen-browser = zen-browser.packages.${node.system};
               master = masterPkgs;
             };
             modules = [
