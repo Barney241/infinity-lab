@@ -30,6 +30,20 @@
       tms = "sh ~/.tmux/sessionizer/sessionizer.sh";
     };
 
+    history = {
+      save = 10000000; # Number of history entries to save
+      size = 10000000; # Number of lines stored in memory
+      share = true; # Share history between zsh sessions
+      ignoreSpace = true; # Ignore commands that start with space
+      ignorePatterns = [ # Ignore common or unimportant commands
+        "ls *"
+        "cd *"
+        "pwd *"
+        "exit *"
+      ];
+      extended = true; # Extended history: timestamps etc.
+    };
+
     # initExtra = ''
     #   eval "$(starship init zsh)"
     # '';
