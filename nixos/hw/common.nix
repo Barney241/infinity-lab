@@ -13,10 +13,10 @@
   boot.kernelParams = [ "loglevel=0" "nmi_watchdog=0" "nowatchdog" ];
 
   systemd.oomd.enable = true;
-  systemd.extraConfig = ''
-    DefaultTimeoutStopSec=10s
-    DefaultLimitNOFILE=4096:1048576
-  '';
+  systemd.settings.Manager = {
+    DefaultTimeoutStopSec = "10s";
+    DefaultLimitNOFILE = "4096:1048576";
+  };
 
   hardware.enableAllFirmware = lib.mkDefault true;
   hardware.enableRedistributableFirmware = lib.mkDefault true;
