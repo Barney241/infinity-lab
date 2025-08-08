@@ -1,25 +1,22 @@
-    { lib, pkgs, config, ... }:
-{
+{ lib, pkgs, config, ... }: {
 
   boot.loader = {
     efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/efi"; # ← use the same mount point here.
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/efi"; # ← use the same mount point here.
     };
     grub = {
-        enable = true;
-        efiSupport = true;
-        devices = [ "nodev" ];
-        useOSProber = true;
-   };
+      enable = true;
+      efiSupport = true;
+      devices = [ "nodev" ];
+      useOSProber = true;
+    };
   };
 
-  imports =
-    [
-      ./common.nix
-    ];
+  imports = [ ./common.nix ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
@@ -30,28 +27,33 @@
       fsType = "ext4";
     };
     "/media" = {
-        device="192.168.18.122:/volume1/media";
-        fsType="nfs";
-        options = [ 
-        "x-systemd.automount"
-        "noauto"
-        "x-systemd.idle-timeout=600"
-        ];
+      device = "192.168.18.122:/volume1/media";
+      fsType = "nfs";
+      options = [ "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" ];
     };
     "/disks/hdd_backup" = {
       device = "/dev/disk/by-uuid/e891b814-1ce9-4448-b979-f20f6ff0221e";
       fsType = "ext4";
     };
-     "/efi" = {
-       device = "/dev/disk/by-uuid/EBAD-07A2";
-       fsType = "vfat";
+    "/efi" = {
+      device = "/dev/disk/by-uuid/EBAD-07A2";
+      fsType = "vfat";
     };
   };
 
-  swapDevices = [ {
+  swapDevices = [{
     device = "/var/lib/swapfile";
-    size = 16*1024; # in MiB
-  } ];
+    size = 16 * 1024; # in MiB
+  }];
+
+  services.auto-cpufreq.enable = true;
+  services.auto-cpufreq.settings = {
+    charger = {
+      governor = "performance";
+      energy_performance_preference = "balance_power";
+      turbo = "auto";
+    };
+  };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -65,9 +67,7 @@
 
   gpus.nvidia.enable = true;
 
-  hardware = {
-    cpu.amd.updateMicrocode = true;
-  };
+  hardware = { cpu.amd.updateMicrocode = true; };
 
   services = {
     xserver = {
