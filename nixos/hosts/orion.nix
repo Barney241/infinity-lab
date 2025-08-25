@@ -7,7 +7,10 @@
   roles = {
     desktop = { enable = true; };
     docker = { enable = true; };
-    dev = { enable = true; };
+    dev = {
+      cli = true;
+      gui = true;
+    };
     lsp = {
       go = true;
       rust = true;

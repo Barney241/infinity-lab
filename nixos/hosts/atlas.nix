@@ -1,7 +1,7 @@
 { ... }: {
   imports = [ ../common.nix ];
   networking = {
-    hostName = "serveros";
+    hostName = "atlas";
     firewall = {
       enable = true;
       allowPing = true;
@@ -16,26 +16,17 @@
     };
   };
 
-  i3.enable = true;
-
   roles = {
-    desktop = { enable = true; };
     docker = { enable = true; };
     dev = {
       cli = true;
-      gui = true;
+      gui = false;
     };
     lsp = {
       go = true;
       rust = true;
     };
     tailscale = { enable = true; };
-    jupyter = {
-      enable = false; # dependecy failure
-    };
-    gaming = { enable = true; };
-    pipewire = { enable = true; };
     ssh = { enable = true; };
-    ai = { enable = true; };
   };
 }

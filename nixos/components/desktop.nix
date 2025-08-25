@@ -21,7 +21,6 @@ in {
       slack
 
       #browsers
-      pkgs.google-chrome
       pkgs.chromium
       zen-browser.default
 
