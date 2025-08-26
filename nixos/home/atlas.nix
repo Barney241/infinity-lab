@@ -5,6 +5,7 @@
     ./common.nix
     ../programs/zsh.nix
     ../programs/tmux.nix
+    ../programs/ghostty.nix
     ../programs/git.nix
   ];
 
