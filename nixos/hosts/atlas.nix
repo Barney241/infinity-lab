@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   imports = [ ../common.nix ];
   networking = {
     hostName = "atlas";
@@ -15,6 +15,8 @@
       }];
     };
   };
+
+  environment.systemPackages = [ pkgs.ghostty ];
 
   roles = {
     docker = { enable = true; };
