@@ -1,5 +1,4 @@
-{ config, lib, pkgs, ... }:
-{
+{ config, lib, pkgs, ... }: {
   imports = [
     ./alacritty.nix
     ./audio.nix
@@ -14,7 +13,7 @@
     mako
     wallutils
     wl-clipboard
-    libsForQt5.kdeconnect-kde
+    kdePackages.kdeconnect-kde
     wdisplays
     waypipe
 

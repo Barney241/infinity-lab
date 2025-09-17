@@ -26,7 +26,7 @@
     pkgs.mako
     pkgs.wallutils
     pkgs.wl-clipboard
-    pkgs.libsForQt5.kdeconnect-kde
+    pkgs.kdePackages.kdeconnect-kde
     pkgs.wdisplays
     pkgs.waypipe
     pkgs.dconf

@@ -21,7 +21,7 @@
     pkgs.dbus # make dbus-update-activation-environment available in the path
     pkgs.kanshi
     pkgs.mako
-    pkgs.libsForQt5.kdeconnect-kde
+    pkgs.kdePackages.kdeconnect-kde
     pkgs.waypipe
     pkgs.dconf
     pkgs.bash

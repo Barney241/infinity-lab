@@ -55,7 +55,7 @@ in {
 
     (lib.mkIf cfg.gui {
       environment.systemPackages = with pkgs; [
-        stable.dbeaver-bin
+        dbeaver-bin
         # jetbrains.jdk
         # jetbrains.goland
         jetbrains.idea-ultimate

@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   home.packages = [
-    pkgs.libsForQt5.kdeconnect-kde
+    # pkgs.kdePackages.kdeconnect-kde
 
     #dev
     pkgs.postman
@@ -11,7 +11,6 @@
     #social
     pkgs.caprine-bin
     pkgs.teamspeak5_client
-    pkgs.teamspeak3
 
     #media
     pkgs.vlc

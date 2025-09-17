@@ -44,6 +44,7 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.nameservers = [ "8.8.8.8" "8.8.4.4" ];
   # networking.interfaces.ens3.useDHCP = lib.mkDefault true;
+  networking.interfaces.enp86s0.wakeOnLan.enable = true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
