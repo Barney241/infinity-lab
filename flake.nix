@@ -67,7 +67,8 @@
               config = {
                 allowUnfree = true;
                 allowBroken = true;
-                permittedInsecurePackages = [ "electron-25.9.0" ];
+                permittedInsecurePackages =
+                  [ "electron-25.9.0" "electron-35.7.5" ];
               };
             };
             masterPkgs = import master {
@@ -75,7 +76,8 @@
               config = {
                 allowUnfree = true;
                 allowBroken = true;
-                permittedInsecurePackages = [ "electron-25.9.0" ];
+                permittedInsecurePackages =
+                  [ "electron-25.9.0" "electron-35.7.5" ];
               };
             };
           in nixosSystem {

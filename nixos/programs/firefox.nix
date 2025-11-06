@@ -1,12 +1,9 @@
-{ config, lib, pkgs, ... }:
-{
+{ config, lib, pkgs, ... }: {
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-wayland;
+    package = pkgs.firefox;
   };
 
-  home.sessionVariables = {
-    MOZ_ENABLE_WAYLAND = 1;
-  };
+  home.sessionVariables = { MOZ_ENABLE_WAYLAND = 1; };
 
 }

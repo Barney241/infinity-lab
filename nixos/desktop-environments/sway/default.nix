@@ -27,7 +27,6 @@ in {
 
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
     environment.systemPackages = [
-      pkgs.whatsapp-for-linux
       pkgs.wayvnc
       pkgs.pavucontrol
       pkgs.blueberry

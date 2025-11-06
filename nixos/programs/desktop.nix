@@ -9,8 +9,9 @@
     pkgs.resp-app # redis client
 
     #social
+    pkgs.wasistlos
     pkgs.caprine-bin
-    pkgs.teamspeak5_client
+    pkgs.teamspeak6-client
 
     #media
     pkgs.vlc
@@ -18,7 +19,7 @@
 
     #system apps
     pkgs.bitwarden-cli
-    pkgs.bitwarden
+    pkgs.bitwarden-desktop
     pkgs.solaar # logitech
     pkgs.gnome-calculator
     pkgs.gnome-disk-utility

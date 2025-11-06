@@ -12,7 +12,7 @@
     config = {
       allowUnfree = true;
       allowBroken = false;
-      permittedInsecurePackages = [ "electron-25.9.0" ];
+      permittedInsecurePackages = [ "electron-25.9.0" "electron-35.7.5" ];
     };
     overlays = [ attrs.nur.overlays.default ];
   };
