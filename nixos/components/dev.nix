@@ -40,6 +40,9 @@ in {
         rustfmt
         rustup
 
+        #ai
+        claude-code
+
         #lsp
         buf
 
@@ -56,10 +59,10 @@ in {
     (lib.mkIf cfg.gui {
       environment.systemPackages = with pkgs; [
         dbeaver-bin
+        jetbrains.idea-ultimate
         # jetbrains.jdk
         # jetbrains.goland
-        jetbrains.idea-ultimate
-        code-cursor
+        # code-cursor
         # jetbrains.pycharm-professional
         # jetbrains.phpstorm
         # jetbrains.webstorm

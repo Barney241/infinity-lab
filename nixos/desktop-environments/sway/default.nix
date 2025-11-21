@@ -110,16 +110,13 @@ in {
       enable = true;
       settings = {
         default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd sway";
           user = "greeter";
         };
       };
     };
 
-    services.xserver = {
-      # videoDrivers = [ "nvidia" ];
-      displayManager.gdm.wayland = true;
-    };
+    services.displayManager.gdm.wayland = true;
 
     systemd.user.services.polkit-kde-authentication-agent-1 = {
       description = "polkit-kde-authentication-agent-1";

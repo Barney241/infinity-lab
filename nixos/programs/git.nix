@@ -2,7 +2,11 @@
 {
   programs.git = {
     enable = true;
-    userName = "Pavel Adamek";
-    userEmail = "pavel.adamek241@gmail.com";
+    settings = {
+      user = {
+        name = "Pavel Adamek";
+        email = "pavel.adamek241@gmail.com";
+      };
+    };
   };
 }
