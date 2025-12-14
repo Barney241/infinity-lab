@@ -17,7 +17,6 @@ in {
       pkgs.nvtopPackages.full
       pkgs.cudaPackages.cudatoolkit
       pkgs.cudaPackages.cudnn
-      pkgs.cudaPackages.cutensor
       # pkgs.linuxPackages.nvidia_x11
     ];
     boot.initrd.kernelModules =

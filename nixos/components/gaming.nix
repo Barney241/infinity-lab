@@ -19,15 +19,15 @@ in {
     environment.systemPackages = with pkgs; [
       steam
       steam-run
-      lutris
+      # lutris
       xorg.xinput
-      (lutris.override {
-        extraPkgs = pkgs: [
-          # List package dependencies here
-          wineWowPackages.stable
-          winetricks
-        ];
-      })
+      # (lutris.override {
+      #   extraPkgs = pkgs: [
+      #     # List package dependencies here
+      #     wineWowPackages.stable
+      #     winetricks
+      #   ];
+      # })
       wine
       winetricks
       # wineWowPackages.waylandFull
