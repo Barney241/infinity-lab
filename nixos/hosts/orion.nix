@@ -20,7 +20,7 @@
     pipewire = { enable = true; };
     ssh = {
       enable = true;
-      startAgent = false;
+      startAgent = true;
     }; # COSMIC has its own
     ios = { enable = true; };
     pam = { fingerprint.enable = false; };
