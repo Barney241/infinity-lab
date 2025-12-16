@@ -7,6 +7,12 @@ in {
       example = true;
       type = lib.types.bool;
     };
+    startAgent = lib.mkOption {
+      default = true;
+      example = false;
+      type = lib.types.bool;
+      description = "Enable SSH agent (disable if using COSMIC/GNOME which has its own)";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -23,9 +29,10 @@ in {
       settings = {
         PasswordAuthentication = false;
         KbdInteractiveAuthentication = false;
+        PermitRootLogin = "no";
       };
       allowSFTP = true;
     };
-    programs.ssh.startAgent = true;
+    programs.ssh.startAgent = cfg.startAgent;
   };
 }

@@ -1,5 +1,5 @@
 # Common config shared among all machines
-{ pkgs, attrs, lib, hostName, ... }: {
+{ config, pkgs, attrs, lib, hostName, ... }: {
   system.stateVersion = "24.05";
 
   imports = [
@@ -21,15 +21,19 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 30d";
+    options = "--delete-older-than 7d";
   };
   nix.optimise.automatic = true;
+
+  # zram swap (memory compression)
+  zramSwap.enable = true;
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
     substituters = [
       "https://nyx.chaotic.cx"
       "https://cache.nixos.org"
+      "https://cache.numtide.com"
       "https://hyprland.cachix.org"
       "https://nix-gaming.cachix.org"
       "https://nix-community.cachix.org"
@@ -38,6 +42,7 @@
     trusted-public-keys = [
       "nyx.chaotic.cx-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
@@ -91,7 +96,7 @@
     home = "/home/barney";
     description = "barney";
     extraGroups = [ "wheel" "gamemode" ];
-    initialPassword = "test";
+    hashedPasswordFile = config.age.secrets.barney-password.path;
   };
 
   users.users.docker = {

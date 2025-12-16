@@ -40,9 +40,6 @@ in {
         rustfmt
         rustup
 
-        #ai
-        claude-code
-
         #lsp
         buf
 

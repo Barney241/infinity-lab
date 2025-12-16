@@ -16,7 +16,6 @@ in {
 
   config = lib.mkIf cfg.enable (lib.mkMerge [{
     security.rtkit.enable = true;
-    security.pam.services.swaylock = { };
     # sound.enable = true;
 
     programs.xwayland.enable = true;
@@ -115,8 +114,6 @@ in {
         };
       };
     };
-
-    services.displayManager.gdm.wayland = true;
 
     systemd.user.services.polkit-kde-authentication-agent-1 = {
       description = "polkit-kde-authentication-agent-1";

@@ -30,5 +30,7 @@
     };
     tailscale = { enable = true; };
     ssh = { enable = true; };
+    auto-cpufreq = { enable = true; profile = "desktop-powersave"; };
+    agenix = { enable = true; };
   };
 }

@@ -4,5 +4,6 @@
         ./sway
         ./kde
         ./hyprland
+        ./cosmic
     ];
 }

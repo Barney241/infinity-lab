@@ -46,14 +46,7 @@
     size = 16 * 1024; # in MiB
   }];
 
-  services.auto-cpufreq.enable = true;
-  services.auto-cpufreq.settings = {
-    charger = {
-      governor = "performance";
-      energy_performance_preference = "balance_power";
-      turbo = "auto";
-    };
-  };
+  # auto-cpufreq moved to roles.auto-cpufreq
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

@@ -12,7 +12,6 @@
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-utils.url = "github:numtide/flake-utils";
-    # flake-utils.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -23,10 +22,8 @@
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
 
-    zen-browser = {
-      url = "github:youwen5/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    zen-browser.url = "github:youwen5/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
     nur.url = "github:nix-community/NUR";
 
@@ -47,6 +44,8 @@
     hyprland.url = "github:hyprwm/Hyprland";
 
     vscode-server.url = "github:nix-community/nixos-vscode-server";
+
+    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   outputs = { self, nixpkgs, master, stable, nur, flake-utils, home-manager
@@ -90,12 +89,14 @@
               hostName = host;
               stable = stablePkgs;
               zen-browser = zen-browser.packages.${node.system};
+              llm-agents = attrs.llm-agents.packages.${node.system};
               master = masterPkgs;
             };
             modules = [
               nur.modules.nixos.default
               attrs.chaotic.nixosModules.default
               attrs.vscode-server.nixosModules.default
+              attrs.agenix.nixosModules.default
               node.config
               node.hw
               home-manager.nixosModules.home-manager

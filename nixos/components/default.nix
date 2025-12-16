@@ -12,5 +12,10 @@
     ./ssh.nix
     ./ai.nix
     ./ios.nix
+    ./pam.nix
+    ./llm-tools.nix
+    ./netdata.nix
+    ./agenix.nix
+    ./auto-cpufreq.nix
   ];
 }

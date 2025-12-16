@@ -9,8 +9,14 @@ in
 
   config = lib.mkIf cfg.enable
     {
-      virtualisation.docker.enable = true;
-      users.extraGroups.docker.members = [ 
+      virtualisation.docker = {
+        enable = true;
+        autoPrune = {
+          enable = true;
+          dates = "weekly";
+        };
+      };
+      users.extraGroups.docker.members = [
         "barney"
         "docker"
       ];

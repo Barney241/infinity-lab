@@ -1,4 +1,7 @@
 { config, pkgs, lib, ... }:
+# Jupyter password is stored in agenix secret
+# Generate hash: python3 -c "from notebook.auth import passwd; print(passwd('yourpassword'))"
+# Create secret: cd nixos/secrets && agenix -e jupyter-password.age
 let
   cfg = config.roles.jupyter;
   pythonJupyter = pkgs.python311.withPackages
@@ -30,6 +33,15 @@ in {
 
     environment.systemPackages = with pkgs; [ pythonKernel ];
 
+    # Patch jupyter config with password from agenix secret before service starts
+    systemd.services.jupyter.serviceConfig.ExecStartPre = let
+      passwordFile = config.age.secrets.jupyter-password.path;
+      configDir = "/var/lib/jupyter";
+    in [
+      "${pkgs.coreutils}/bin/mkdir -p ${configDir}"
+      ''${pkgs.bash}/bin/bash -c "echo \"c.ServerApp.password = '$(cat ${passwordFile})'\" > ${configDir}/jupyter_server_config.py"''
+    ];
+
     services.jupyter = {
       enable = true;
       ip = "0.0.0.0";
@@ -37,7 +49,7 @@ in {
       command = "jupyter-lab";
       user = "barney";
       group = "jupyter";
-      password = "1234";
+      password = ""; # Handled by ExecStartPre above
       notebookDir = "~/Projects/jupyter";
       package = pythonJupyter;
       kernels = {
