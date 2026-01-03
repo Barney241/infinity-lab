@@ -32,5 +32,8 @@
     ssh = { enable = true; };
     auto-cpufreq = { enable = true; profile = "desktop-powersave"; };
     agenix = { enable = true; };
+    fail2ban = { enable = true; };
+    suricata = { enable = true; };
+    clamav = { enable = true; dailyScan = true; };
   };
 }

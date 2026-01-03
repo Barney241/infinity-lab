@@ -14,7 +14,13 @@
       allowBroken = false;
       permittedInsecurePackages = [ "electron-25.9.0" "electron-35.7.5" ];
     };
-    overlays = [ attrs.nur.overlays.default ];
+    overlays = [
+      attrs.nur.overlays.default
+      # Disable CUDA for onnxruntime to use cached builds (gamescope doesn't need GPU inference)
+      (final: prev: {
+        onnxruntime = prev.onnxruntime.override { cudaSupport = false; };
+      })
+    ];
   };
 
   # Garbage collect & optimize /nix/store daily.
@@ -38,6 +44,7 @@
       "https://nix-gaming.cachix.org"
       "https://nix-community.cachix.org"
       "https://nixpkgs-wayland.cachix.org"
+      "https://cuda-maintainers.cachix.org"
     ];
     trusted-public-keys = [
       "nyx.chaotic.cx-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
@@ -47,6 +54,7 @@
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
+      "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
     ];
   };
 
@@ -119,6 +127,11 @@
   services.fwupd.enable = true;
 
   services.libinput.mouse.middleEmulation = false;
+
+  services.glances = {
+    enable = true;
+    openFirewall = true;
+  };
 
   # age.secrets = {
   #   influxdb-telegraf.file = ./secrets/influxdb-telegraf.age;

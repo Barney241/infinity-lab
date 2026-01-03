@@ -12,7 +12,7 @@ in {
   config = lib.mkIf cfg.enable (lib.mkMerge [{
     environment.pathsToLink = [ "/libexec" ];
 
-    environment.xfce.excludePackages = [ pkgs.xfce.xfce4-power-manager ];
+    environment.xfce.excludePackages = [ pkgs.xfce4-power-manager ];
 
     services.gvfs.enable = true;
     security.rtkit.enable = true;

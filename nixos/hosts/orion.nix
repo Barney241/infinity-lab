@@ -31,5 +31,7 @@
       enable = true;
       profile = "laptop";
     };
+    fail2ban = { enable = true; };
+    clamav = { enable = true; };
   };
 }

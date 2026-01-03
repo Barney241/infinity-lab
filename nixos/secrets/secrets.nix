@@ -10,7 +10,7 @@ let
   orion =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILDH7lfGPiVzBUl3pygy81S5PvHBw+c9ok8t9BsFhopA orion";
   serveros =
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJAnvXO1xYmlv1oVLGyPaCo+xeG6Qonuglj8VXfGLCZr serveros";
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBN3SvqvdsLVt02UNNiD9qbXNhR0yiJ/xqlA4/xDiV3D serveros";
   atlas =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGHhwXVJo+616W9nzJzuwsuzpL7W70gA55+cgIlkDqkj atlas";
 

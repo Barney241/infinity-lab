@@ -24,7 +24,7 @@ in {
         postgresql_16
 
         kubectl
-        kdash # kubernetes dashboard
+        stable.kdash # kubernetes dashboard (stable: GCC 15 compat issue)
 
         nil
         rustup
@@ -56,7 +56,7 @@ in {
     (lib.mkIf cfg.gui {
       environment.systemPackages = with pkgs; [
         dbeaver-bin
-        jetbrains.idea-ultimate
+        jetbrains.idea
         # jetbrains.jdk
         # jetbrains.goland
         # code-cursor

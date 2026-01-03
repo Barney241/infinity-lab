@@ -26,9 +26,9 @@
     pkgs.dconf
     pkgs.bash
     pkgs.alsa-utils
-    pkgs.xfce.xfce4-screenshooter
-    pkgs.xfce.xfce4-clipman-plugin
-    pkgs.xfce.xfce4-notifyd
+    pkgs.xfce4-screenshooter
+    pkgs.xfce4-clipman-plugin
+    pkgs.xfce4-notifyd
     pkgs.pavucontrol
   ];
 

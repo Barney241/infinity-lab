@@ -17,5 +17,8 @@
     ./netdata.nix
     ./agenix.nix
     ./auto-cpufreq.nix
+    ./fail2ban.nix
+    ./suricata.nix
+    ./clamav.nix
   ];
 }
