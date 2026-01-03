@@ -131,6 +131,12 @@
   services.glances = {
     enable = true;
     openFirewall = true;
+    extraArgs = [
+      "--time" "5"                   # Update every 5 seconds instead of 1
+      "--disable-plugin" "docker"    # Disable docker plugin
+      "--disable-plugin" "containers"
+      "--disable-plugin" "gpu"
+    ];
   };
 
   # age.secrets = {
