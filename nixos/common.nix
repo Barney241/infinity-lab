@@ -132,6 +132,7 @@
     enable = true;
     openFirewall = true;
     extraArgs = [
+      "-w"                           # Enable web server mode
       "--time" "5"                   # Update every 5 seconds instead of 1
       "--disable-plugin" "docker"    # Disable docker plugin
       "--disable-plugin" "containers"
