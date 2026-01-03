@@ -36,7 +36,9 @@
     };
     agenix = { enable = true; };
     fail2ban = { enable = true; };
-    suricata = { enable = true; };
-    clamav = { enable = true; dailyScan = true; };
+    clamav = {
+      enable = true;
+      dailyScan = true;
+    };
   };
 }
