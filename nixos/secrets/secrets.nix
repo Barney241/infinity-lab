@@ -12,7 +12,7 @@ let
   serveros =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBN3SvqvdsLVt02UNNiD9qbXNhR0yiJ/xqlA4/xDiV3D serveros";
   atlas =
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGHhwXVJo+616W9nzJzuwsuzpL7W70gA55+cgIlkDqkj atlas";
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAoZGSefdCUCo9RAJd0lYK+HBe6Cgv1jZwdvSkAaaJTk atlas";
 
   allUsers = [ barney nova ];
   allHosts = [ orion serveros atlas ];
