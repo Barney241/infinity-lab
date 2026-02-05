@@ -36,7 +36,7 @@
     gaming = { enable = true; };
     pipewire = { enable = true; };
     ssh = { enable = true; };
-    # ai = { enable = true; };
+    ai = { enable = true; };
     pam = { fingerprint.enable = false; };
     llm-tools = { enable = true; };
     netdata = { enable = true; };
