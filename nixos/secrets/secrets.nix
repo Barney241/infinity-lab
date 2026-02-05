@@ -8,7 +8,7 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOctOJ8UpxXARoOsBFnUTuvr6da4JQcL514gPUBdUGME nova";
 
   orion =
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILDH7lfGPiVzBUl3pygy81S5PvHBw+c9ok8t9BsFhopA orion";
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG4PEQV5dqjuN5Ay888SO7vYWHePH8YwJiqc0ZlffRpg orion";
   serveros =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBN3SvqvdsLVt02UNNiD9qbXNhR0yiJ/xqlA4/xDiV3D serveros";
   atlas =

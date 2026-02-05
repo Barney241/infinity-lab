@@ -24,7 +24,11 @@ in {
 
     fonts.packages = with pkgs; [ nerd-fonts.fira-code ];
 
-    environment.sessionVariables.NIXOS_OZONE_WL = "1";
+    environment.sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+      XDG_SESSION_TYPE = "wayland";
+      GTK_USE_PORTAL = "1";
+    };
     environment.systemPackages = [
       pkgs.wayvnc
       pkgs.pavucontrol

@@ -1,4 +1,5 @@
-{ lib, modulesPath, ... }: {
+{ lib, pkgs, modulesPath, ... }: {
+  hardware.firmware = [ pkgs.sof-firmware ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 

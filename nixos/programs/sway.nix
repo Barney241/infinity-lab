@@ -339,8 +339,8 @@
       titlebar_padding 2
       font monospace 0.1
 
-      # testing
-      exec systemctl --user import-environment
+      exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+      exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
     '';
     # extraOptions = ["--unsupported-gpu"];
   };

@@ -1,5 +1,71 @@
 # Common config shared among all machines
-{ config, pkgs, attrs, lib, hostName, ... }: {
+{ config, pkgs, attrs, lib, hostName, ... }:
+let
+  nix-update = pkgs.writeShellScriptBin "nix-update" ''
+    set -euo pipefail
+
+    FLAKE_DIR="/home/barney/Projects/infinity-lab"
+    HOST=$(${pkgs.hostname}/bin/hostname)
+
+    # Colors for output
+    RED='\033[0;31m'
+    GREEN='\033[0;32m'
+    YELLOW='\033[1;33m'
+    BLUE='\033[0;34m'
+    NC='\033[0m'
+
+    log_info() { echo -e "''${BLUE}[INFO]''${NC} $1"; }
+    log_success() { echo -e "''${GREEN}[SUCCESS]''${NC} $1"; }
+    log_warn() { echo -e "''${YELLOW}[WARN]''${NC} $1"; }
+    log_error() { echo -e "''${RED}[ERROR]''${NC} $1"; }
+
+    echo -e "''${BLUE}============================================''${NC}"
+    echo -e "''${BLUE}  NixOS Update Script - Host: ''${GREEN}$HOST''${NC}"
+    echo -e "''${BLUE}============================================''${NC}"
+    echo ""
+
+    # Step 1: Update flake inputs
+    log_info "Updating flake inputs..."
+    cd "$FLAKE_DIR"
+    ${pkgs.nix}/bin/nix flake update
+    log_success "Flake inputs updated"
+    echo ""
+
+    # Step 2: Rebuild NixOS
+    log_info "Rebuilding NixOS for host: $HOST..."
+    sudo ${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake "$FLAKE_DIR#$HOST"
+    log_success "NixOS rebuilt successfully"
+    echo ""
+
+    # Step 3: Clean nix cache
+    log_info "Cleaning nix store (garbage collection)..."
+    sudo ${pkgs.nix}/bin/nix-collect-garbage -d
+    log_success "Nix garbage collection complete"
+    echo ""
+
+    # Step 4: Optimize nix store
+    log_info "Optimizing nix store..."
+    sudo ${pkgs.nix}/bin/nix store optimise
+    log_success "Nix store optimized"
+    echo ""
+
+    # Step 5: Update firmware
+    log_info "Checking for firmware updates..."
+    if command -v fwupdmgr &> /dev/null; then
+        ${pkgs.fwupd}/bin/fwupdmgr refresh --force 2>/dev/null || log_warn "Could not refresh firmware metadata"
+        ${pkgs.fwupd}/bin/fwupdmgr get-updates 2>/dev/null || log_info "No firmware updates available"
+        ${pkgs.fwupd}/bin/fwupdmgr update -y 2>/dev/null || log_info "Firmware update complete (or no updates needed)"
+        log_success "Firmware check complete"
+    else
+        log_warn "fwupdmgr not found, skipping firmware updates"
+    fi
+    echo ""
+
+    echo -e "''${GREEN}============================================''${NC}"
+    echo -e "''${GREEN}  Update complete for: $HOST''${NC}"
+    echo -e "''${GREEN}============================================''${NC}"
+  '';
+in {
   system.stateVersion = "24.05";
 
   imports = [
@@ -65,7 +131,9 @@
   networking.networkmanager.enable = lib.mkDefault true;
   services.resolved.enable = true;
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
+    nix-update
+  ] ++ (with pkgs; [
     iwd
     git
     tmux
@@ -90,7 +158,7 @@
     nfs-utils
     mdadm
     spaceship-prompt
-  ];
+  ]);
 
   environment.sessionVariables = { EDITOR = "nvim"; };
 
@@ -103,7 +171,7 @@
     isNormalUser = true;
     home = "/home/barney";
     description = "barney";
-    extraGroups = [ "wheel" "gamemode" ];
+    extraGroups = [ "wheel" "gamemode" "audio" ];
     hashedPasswordFile = config.age.secrets.barney-password.path;
   };
 

@@ -4,8 +4,6 @@ let
 
   slack = pkgs.slack.overrideAttrs (oldAttrs: rec {
     fixupPhase = ''
-      sed -i -e 's/,"WebRTCPipeWireCapturer"/,"LebRTCPipeWireCapturer"/' $out/lib/slack/resources/app.asar
-
       rm $out/bin/slack
       makeWrapper $out/lib/slack/slack $out/bin/slack \
         --prefix XDG_DATA_DIRS : $GSETTINGS_SCHEMAS_PATH \

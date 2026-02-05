@@ -37,7 +37,7 @@ in {
 
     programs.gamescope = {
       enable = true;
-      package = pkgs.gamescope_git; # Chaotic package
+      # package = pkgs.gamescope_git; # Chaotic package
       capSysNice = true;
     };
 

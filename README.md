@@ -16,6 +16,21 @@
 
 Repo base around playing with nixos, nix and flakes. Trying to build my lab partially in nixos and maybe with more.
 
+## System Update
+
+The `nix-update` command provides a one-stop solution for keeping your system up to date. It automatically detects the current host (atlas, orion, serveros) and performs all update tasks.
+
+```bash
+nix-update
+```
+
+This command will:
+1. Update all flake inputs
+2. Rebuild NixOS for the current host
+3. Clean nix garbage (remove old generations)
+4. Optimize the nix store
+5. Check and apply firmware updates
+
 ## Security
 
 ### Firmware Updates
