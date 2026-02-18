@@ -42,4 +42,9 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   hardware = { cpu.intel.updateMicrocode = true; };
+
+  # SONOFF Zigbee dongle - creates /dev/zigbee symlink when connected
+  services.udev.extraRules = ''
+    SUBSYSTEM=="tty", ATTRS{serial}=="f48e55dbf19aef119129ad9061ce3355", SYMLINK+="zigbee", MODE="0666"
+  '';
 }
