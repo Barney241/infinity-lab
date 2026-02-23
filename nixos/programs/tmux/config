@@ -1,18 +1,28 @@
-bind C-j display-popup -E "tms switch"
+# 1. Base Settings
+set -g base-index 1
+setw -g pane-base-index 1
+set -g mouse on
+set -g allow-passthrough on
+
+# 2. Enable Vi Mode (CRITICAL for your copy bindings)
+set-window-option -g mode-keys vi
+
+# 3. Popup Bindings
+# Changed C-j to C-f to avoid conflict with vim-tmux-navigator
+bind C-f display-popup -E "tms switch"
 bind C-o display-popup -E "sh ~/.tmux/sessionizer/sessionizer.sh"
 bind C-w display-popup -E "tms windows"
 
-set -g base-index 1
-setw -g pane-base-index 1
-
+# 4. Plugins
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'christoomey/vim-tmux-navigator'
+set -g @plugin 'tmux-plugins/tmux-yank'
 
-# set -g @plugin 'tmux-plugins/tmux-resurrect'
-# set -g @plugin 'tmux-plugins/tmux-continuum'
+# 5. Copy Mode Bindings (Vim Style)
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
 
-# set -g @continuum-restore 'on'
-
-
-# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+# Initialize TMUX plugin manager (keep this line at the very bottom)
 run '~/.tmux/plugins/tpm/tpm'
