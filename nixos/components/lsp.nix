@@ -9,7 +9,7 @@ in {
   };
 
   config = lib.mkMerge [
-    ({ environment.systemPackages = [ pkgs.nixfmt-classic ]; })
+    ({ environment.systemPackages = [ pkgs.nixfmt ]; })
 
     (lib.mkIf cfg.go {
       environment.systemPackages =

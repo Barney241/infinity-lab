@@ -20,7 +20,7 @@ in {
       steam
       steam-run
       # lutris
-      xorg.xinput
+      xinput
       # (lutris.override {
       #   extraPkgs = pkgs: [
       #     # List package dependencies here

@@ -82,7 +82,6 @@
               };
             };
           in nixosSystem {
-            inherit (node) system;
             specialArgs = attrs // {
               inherit catalog;
               inherit attrs;
@@ -93,6 +92,7 @@
               master = masterPkgs;
             };
             modules = [
+              { nixpkgs.hostPlatform.system = node.system; }
               nur.modules.nixos.default
               attrs.chaotic.nixosModules.default
               attrs.vscode-server.nixosModules.default
