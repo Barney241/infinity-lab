@@ -27,6 +27,7 @@
     llm-tools = { enable = true; };
     netdata = { enable = true; };
     agenix = { enable = true; };
+    syncthing = { enable = true; };
     auto-cpufreq = {
       enable = true;
       profile = "laptop";

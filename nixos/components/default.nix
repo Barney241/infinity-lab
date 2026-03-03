@@ -20,5 +20,6 @@
     ./fail2ban.nix
     ./suricata.nix
     ./clamav.nix
+    ./syncthing.nix
   ];
 }

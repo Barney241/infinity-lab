@@ -35,6 +35,7 @@
       profile = "desktop-performance";
     };
     agenix = { enable = true; };
+    syncthing = { enable = false; };
     fail2ban = { enable = true; };
     clamav = {
       enable = true;
