@@ -42,7 +42,7 @@ in {
       pkgs.pcsclite # testing
       pkgs.pulseaudio # testing
       pkgs.alsa-utils # testing
-      pkgs.helvum # testing
+      pkgs.crosspipe # testing
 
       pkgs.simple-scan # testing
       pkgs.affine # testing

@@ -21,5 +21,6 @@
     ./suricata.nix
     ./clamav.nix
     ./syncthing.nix
+    ./autosuspend.nix
   ];
 }

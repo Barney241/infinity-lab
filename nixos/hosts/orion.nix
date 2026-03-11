@@ -35,4 +35,12 @@
     fail2ban = { enable = true; };
     clamav = { enable = true; };
   };
+
+  services.logind.settings.Login = {
+    HandleLidSwitch = "suspend";
+    HandleLidSwitchExternalPower = "suspend";
+  };
+
+  # Force deep S3 suspend instead of s2idle (suspend-to-idle drains battery)
+  boot.kernelParams = [ "mem_sleep_default=deep" ];
 }

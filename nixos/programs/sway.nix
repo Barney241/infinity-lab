@@ -32,6 +32,7 @@
     pkgs.dconf
     pkgs.swaylock
     pkgs.swayidle
+    pkgs.wlogout
     pkgs.brightnessctl
   ];
 
@@ -41,6 +42,18 @@
     WLR_NO_HARDWARE_CURSORS = "1";
   };
   services.cliphist.enable = true;
+
+  services.swayidle = {
+    enable = true;
+    events = {
+      before-sleep = "${pkgs.swaylock}/bin/swaylock -f";
+      lock = "${pkgs.swaylock}/bin/swaylock -f";
+    };
+    timeouts = [
+      { timeout = 300; command = "${pkgs.swaylock}/bin/swaylock -f"; }
+      { timeout = 600; command = "systemctl suspend"; }
+    ];
+  };
   gtk = {
     enable = true;
     cursorTheme = {
@@ -199,9 +212,8 @@
           # Random wallpaper
           "Mod1+N" = "exec setrandom -m scale /home/barney/.config/wallpapers";
 
-          # exit sway (logs you out of your Wayland session)
-          "${modifier}+Shift+e" =
-            "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
+          # power menu (lock / logout / suspend / reboot / shutdown)
+          "${modifier}+Shift+e" = "exec wlogout";
 
           "${modifier}+Control+L" =
             "exec swaylock -f -i /home/barney/.config/wallpapers/923963.jpg -s fill";
@@ -341,6 +353,8 @@
 
       exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
       exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+
+      bindswitch --reload lid:on exec systemctl suspend
     '';
     # extraOptions = ["--unsupported-gpu"];
   };
