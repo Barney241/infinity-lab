@@ -1,4 +1,10 @@
-{ lib, pkgs, config, ... }: {
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+{
 
   boot.loader = {
     efi = {
@@ -15,8 +21,15 @@
 
   imports = [ ./common.nix ];
 
-  boot.initrd.availableKernelModules =
-    [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ahci"
+    "nvme"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+    "sr_mod"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
@@ -27,9 +40,13 @@
       fsType = "ext4";
     };
     "/media" = {
-      device = "192.168.18.122:/volume1/media";
+      device = "192.168.1.122:/volume1/media";
       fsType = "nfs";
-      options = [ "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" ];
+      options = [
+        "x-systemd.automount"
+        "noauto"
+        "x-systemd.idle-timeout=600"
+      ];
     };
     "/disks/hdd_backup" = {
       device = "/dev/disk/by-uuid/e891b814-1ce9-4448-b979-f20f6ff0221e";
@@ -41,10 +58,12 @@
     };
   };
 
-  swapDevices = [{
-    device = "/var/lib/swapfile";
-    size = 16 * 1024; # in MiB
-  }];
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 16 * 1024; # in MiB
+    }
+  ];
 
   # auto-cpufreq moved to roles.auto-cpufreq
 
@@ -62,7 +81,9 @@
 
   gpus.nvidia.enable = true;
 
-  hardware = { cpu.amd.updateMicrocode = true; };
+  hardware = {
+    cpu.amd.updateMicrocode = true;
+  };
 
   services = {
     xserver = {

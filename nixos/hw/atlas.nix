@@ -1,12 +1,28 @@
-{ lib, pkgs, config, ... }: {
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+{
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   imports = [ ./common.nix ];
 
-  boot.initrd.availableKernelModules =
-    [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
+  # Enable watchdog for crash debugging (overrides common.nix)
+  boot.kernelParams = lib.mkForce [ "loglevel=0" ];
+
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ahci"
+    "nvme"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+    "sr_mod"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
@@ -17,16 +33,22 @@
       fsType = "ext4";
     };
     "/media" = {
-      device = "192.168.18.122:/volume1/media";
+      device = "192.168.1.122:/volume1/media";
       fsType = "nfs";
-      options = [ "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" ];
+      options = [
+        "x-systemd.automount"
+        "noauto"
+        "x-systemd.idle-timeout=600"
+      ];
     };
   };
 
-  swapDevices = [{
-    device = "/var/lib/swapfile";
-    size = 16 * 1024; # in MiB
-  }];
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 16 * 1024; # in MiB
+    }
+  ];
 
   # auto-cpufreq moved to roles.auto-cpufreq
 
@@ -41,7 +63,9 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  hardware = { cpu.intel.updateMicrocode = true; };
+  hardware = {
+    cpu.intel.updateMicrocode = true;
+  };
 
   # SONOFF Zigbee dongle - creates /dev/zigbee symlink when connected
   services.udev.extraRules = ''
