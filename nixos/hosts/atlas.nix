@@ -36,10 +36,7 @@
     };
     agenix = { enable = true; };
     syncthing = { enable = false; };
+    adguard = { enable = true; };
     fail2ban = { enable = true; };
-    clamav = {
-      enable = true;
-      dailyScan = true;
-    };
   };
 }

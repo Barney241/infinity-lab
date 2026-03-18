@@ -22,5 +22,6 @@
     ./clamav.nix
     ./syncthing.nix
     ./autosuspend.nix
+    ./adguard.nix
   ];
 }
