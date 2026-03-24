@@ -56,6 +56,7 @@ in {
     (lib.mkIf cfg.gui {
       environment.systemPackages = with pkgs; [
         dbeaver-bin
+        freelens-bin
         jetbrains.idea
         # jetbrains.jdk
         # jetbrains.goland

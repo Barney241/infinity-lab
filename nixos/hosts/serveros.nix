@@ -1,26 +1,35 @@
-{ ... }: {
+{ ... }:
+{
   imports = [ ../common.nix ];
   networking = {
     hostName = "serveros";
     firewall = {
       enable = true;
       allowPing = true;
-      allowedUDPPortRanges = [{
-        from = 0;
-        to = 65535;
-      }];
-      allowedTCPPortRanges = [{
-        from = 0;
-        to = 65535;
-      }];
+      allowedUDPPortRanges = [
+        {
+          from = 0;
+          to = 65535;
+        }
+      ];
+      allowedTCPPortRanges = [
+        {
+          from = 0;
+          to = 65535;
+        }
+      ];
     };
   };
 
   i3.enable = true;
 
   roles = {
-    desktop = { enable = true; };
-    docker = { enable = true; };
+    desktop = {
+      enable = true;
+    };
+    docker = {
+      enable = true;
+    };
     dev = {
       cli = true;
       gui = true;
@@ -29,25 +38,47 @@
       go = true;
       rust = true;
     };
-    tailscale = { enable = true; };
+    tailscale = {
+      enable = true;
+    };
     jupyter = {
       enable = false; # dependecy failure
     };
-    gaming = { enable = true; };
-    pipewire = { enable = true; };
-    ssh = { enable = true; };
-    ai = { enable = true; };
-    pam = { fingerprint.enable = false; };
-    llm-tools = { enable = true; };
-    netdata = { enable = true; };
-    agenix = { enable = true; };
-    syncthing = { enable = true; };
+    gaming = {
+      enable = true;
+    };
+    pipewire = {
+      enable = true;
+    };
+    ssh = {
+      enable = true;
+      startAgent = false; # XFCE provides gnome-keyring/gcr-ssh-agent
+    };
+    ai = {
+      enable = true;
+    };
+    pam = {
+      fingerprint.enable = false;
+    };
+    llm-tools = {
+      enable = true;
+    };
+    agenix = {
+      enable = true;
+    };
+    syncthing = {
+      enable = true;
+    };
     auto-cpufreq = {
       enable = true;
       profile = "desktop-performance";
     };
-    autosuspend = { enable = true; };
-    fail2ban = { enable = true; };
+    autosuspend = {
+      enable = true;
+    };
+    fail2ban = {
+      enable = true;
+    };
     clamav = {
       enable = true;
       dailyScan = true;

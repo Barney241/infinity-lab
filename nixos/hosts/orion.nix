@@ -1,12 +1,17 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   imports = [ ../common.nix ];
   networking.hostName = "orion";
 
   sway.enable = true;
 
   roles = {
-    desktop = { enable = true; };
-    docker = { enable = true; };
+    desktop = {
+      enable = true;
+    };
+    docker = {
+      enable = true;
+    };
     dev = {
       cli = true;
       gui = true;
@@ -15,25 +20,44 @@
       go = true;
       rust = true;
     };
-    tailscale = { enable = true; };
-    gaming = { enable = true; };
-    pipewire = { enable = true; };
+    tailscale = {
+      enable = true;
+    };
+    gaming = {
+      enable = true;
+    };
+    pipewire = {
+      enable = true;
+    };
     ssh = {
       enable = true;
       startAgent = true;
     }; # COSMIC has its own
-    ios = { enable = true; };
-    pam = { fingerprint.enable = false; };
-    llm-tools = { enable = true; };
-    netdata = { enable = true; };
-    agenix = { enable = true; };
-    syncthing = { enable = true; };
+    ios = {
+      enable = true;
+    };
+    pam = {
+      fingerprint.enable = false;
+    };
+    llm-tools = {
+      enable = true;
+    };
+    agenix = {
+      enable = true;
+    };
+    syncthing = {
+      enable = true;
+    };
     auto-cpufreq = {
       enable = true;
       profile = "laptop";
     };
-    fail2ban = { enable = true; };
-    clamav = { enable = true; };
+    fail2ban = {
+      enable = true;
+    };
+    clamav = {
+      enable = true;
+    };
   };
 
   services.logind.settings.Login = {
