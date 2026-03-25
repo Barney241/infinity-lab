@@ -14,6 +14,10 @@ in {
 
     environment.xfce.excludePackages = [ pkgs.xfce4-power-manager ];
 
+    # Disable gnome-keyring SSH agent — its gcr-prompter dialog is broken on i3
+    # (flickers/cycles). Use the built-in ssh-agent instead.
+    services.gnome.gnome-keyring.enable = lib.mkForce false;
+
     services.gvfs.enable = true;
     security.rtkit.enable = true;
     services.blueman.enable = false;

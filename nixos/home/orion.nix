@@ -6,12 +6,14 @@
     ../programs/zsh.nix
     ../programs/tmux.nix
     ../programs/git.nix
-    ../programs/firefox.nix
+    ../programs/browser.nix
     ../programs/ghostty.nix
     ../programs/alacritty.nix
     ../programs/desktop.nix
     ../programs/sway.nix
   ];
+
+  browser.default = "zen";
 
   home.file = {
     # Stable SDK symlinks

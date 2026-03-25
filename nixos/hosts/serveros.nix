@@ -52,7 +52,7 @@
     };
     ssh = {
       enable = true;
-      startAgent = false; # XFCE provides gnome-keyring/gcr-ssh-agent
+      startAgent = true; # gnome-keyring SSH agent disabled — use built-in ssh-agent
     };
     ai = {
       enable = true;

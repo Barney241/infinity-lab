@@ -1,5 +1,12 @@
 # Common config shared among all machines
-{ config, pkgs, attrs, lib, hostName, ... }:
+{
+  config,
+  pkgs,
+  attrs,
+  lib,
+  hostName,
+  ...
+}:
 let
   nix-update = pkgs.writeShellScriptBin "nix-update" ''
     set -euo pipefail
@@ -27,7 +34,7 @@ let
     # Step 1: Update flake inputs
     log_info "Updating flake inputs..."
     cd "$FLAKE_DIR"
-    ${pkgs.nix}/bin/nix flake update
+    sudo ${pkgs.nix}/bin/nix flake update
     log_success "Flake inputs updated"
     echo ""
 
@@ -65,11 +72,12 @@ let
     echo -e "''${GREEN}  Update complete for: $HOST''${NC}"
     echo -e "''${GREEN}============================================''${NC}"
   '';
-in {
+in
+{
   system.stateVersion = "24.05";
 
   imports = [
-    #System  
+    #System
     ./components
     ./desktop-environments
   ];
@@ -78,7 +86,10 @@ in {
     config = {
       allowUnfree = true;
       allowBroken = false;
-      permittedInsecurePackages = [ "electron-25.9.0" "electron-35.7.5" ];
+      permittedInsecurePackages = [
+        "electron-25.9.0"
+        "electron-35.7.5"
+      ];
     };
     overlays = [
       attrs.nur.overlays.default
@@ -100,8 +111,12 @@ in {
   # zram swap (memory compression)
   zramSwap.enable = true;
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     auto-optimise-store = true;
+    download-buffer-size = 524288000; # 500 MB
     substituters = [
       "https://nyx.chaotic.cx"
       "https://cache.nixos.org"
@@ -133,7 +148,8 @@ in {
 
   environment.systemPackages = [
     nix-update
-  ] ++ (with pkgs; [
+  ]
+  ++ (with pkgs; [
     iwd
     git
     tmux
@@ -160,7 +176,9 @@ in {
     spaceship-prompt
   ]);
 
-  environment.sessionVariables = { EDITOR = "nvim"; };
+  environment.sessionVariables = {
+    EDITOR = "nvim";
+  };
 
   time.timeZone = "Europe/Prague";
 
@@ -171,7 +189,11 @@ in {
     isNormalUser = true;
     home = "/home/barney";
     description = "barney";
-    extraGroups = [ "wheel" "gamemode" "audio" ];
+    extraGroups = [
+      "wheel"
+      "gamemode"
+      "audio"
+    ];
     hashedPasswordFile = config.age.secrets.barney-password.path;
   };
 
@@ -200,11 +222,15 @@ in {
     enable = true;
     openFirewall = true;
     extraArgs = [
-      "-w"                           # Enable web server mode
-      "--time" "5"                   # Update every 5 seconds instead of 1
-      "--disable-plugin" "docker"    # Disable docker plugin
-      "--disable-plugin" "containers"
-      "--disable-plugin" "gpu"
+      "-w" # Enable web server mode
+      "--time"
+      "5" # Update every 5 seconds instead of 1
+      "--disable-plugin"
+      "docker" # Disable docker plugin
+      "--disable-plugin"
+      "containers"
+      "--disable-plugin"
+      "gpu"
     ];
   };
 

@@ -18,8 +18,15 @@ in {
         LogindSessionsIdle = {
           class = "LogindSessionsIdle";
           enabled = true;
-          types = "x11:wayland:mir:unspecified";
-          states = "active:online";
+          types = "x11,wayland,tty,unspecified";
+          states = "active,online";
+        };
+        # Keep awake if X11 input activity detected (fixes i3 not updating logind idle hint)
+        XIdleTime = {
+          class = "XIdleTime";
+          enabled = true;
+          timeout = 900;  # match idle_time
+          method = "logind";
         };
         # Keep awake if there are active SSH connections
         ActiveConnection = {

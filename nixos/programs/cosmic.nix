@@ -3,7 +3,6 @@
     ./ghostty.nix
     ./audio.nix
     ./desktop.nix
-    ./firefox.nix
     ./superfile.nix
   ];
 
@@ -29,6 +28,7 @@
 
   gtk = {
     enable = true;
+    gtk4.theme = null;
     cursorTheme = {
       name = "Vanilla-DMZ";
       package = pkgs.vanilla-dmz;

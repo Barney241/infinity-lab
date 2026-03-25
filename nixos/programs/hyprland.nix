@@ -5,7 +5,7 @@
     ./desktop.nix
     # ./mako.nix
     ./wofi.nix
-    ./firefox.nix
+    # browser is managed by browser.nix imported from host configs
   ];
 
   home.packages = with pkgs; [

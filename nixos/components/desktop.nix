@@ -1,4 +1,4 @@
-{ config, pkgs, lib, zen-browser, ... }:
+{ config, pkgs, lib, ... }:
 let
   cfg = config.roles.desktop;
 
@@ -17,13 +17,7 @@ in {
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [
       slack
-
-      #browsers
-      pkgs.chromium
-      zen-browser.default
-
       pkgs.ghostty
-
     ];
   };
 }

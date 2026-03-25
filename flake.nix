@@ -64,7 +64,7 @@
         metalSystems = mapAttrs (host: node:
           let
             stablePkgs = import stable {
-              inherit (node) system;
+              localSystem = node.system;
               config = {
                 allowUnfree = true;
                 allowBroken = true;
@@ -73,7 +73,7 @@
               };
             };
             masterPkgs = import master {
-              inherit (node) system;
+              localSystem = node.system;
               config = {
                 allowUnfree = true;
                 allowBroken = true;
@@ -103,6 +103,9 @@
               {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = {
+                  zen-browser = zen-browser.packages.${node.system};
+                };
                 home-manager.users.barney = import node.home;
                 home-manager.backupFileExtension = "backup1";
               }

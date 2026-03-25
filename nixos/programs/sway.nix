@@ -6,7 +6,6 @@
     ./mako.nix
     ./wofi.nix
     ./waybar.nix
-    ./firefox.nix
     ./kanshi.nix
     ./himalaya.nix
     ./superfile.nix
@@ -56,6 +55,7 @@
   };
   gtk = {
     enable = true;
+    gtk4.theme = null;
     cursorTheme = {
       name = "Vanilla-DMZ";
       package = pkgs.vanilla-dmz;

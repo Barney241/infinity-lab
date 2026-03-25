@@ -5,7 +5,6 @@
     ./desktop.nix
     ./rofi.nix
     # ./polybar.nix
-    ./firefox.nix
     ./himalaya.nix
     ./superfile.nix
   ];
@@ -40,6 +39,7 @@
 
   gtk = {
     enable = true;
+    gtk4.theme = null;
     cursorTheme = {
       name = "Vanilla-DMZ";
       package = pkgs.vanilla-dmz;
@@ -94,7 +94,27 @@
         };
       };
 
-      window = { hideEdgeBorders = "smart"; };
+      window = {
+        hideEdgeBorders = "smart";
+        commands = [
+          {
+            command = "floating enable, focus";
+            criteria = { class = "Gcr-prompter"; };
+          }
+          {
+            command = "floating enable, focus";
+            criteria = { class = "Pinentry"; };
+          }
+          {
+            command = "floating enable, focus";
+            criteria = { class = "Seahorse"; };
+          }
+          {
+            command = "floating enable, focus";
+            criteria = { class = "ssh-askpass"; };
+          }
+        ];
+      };
 
       keybindings = lib.mkOptionDefault {
         "XF86AudioMute" = "exec amixer set Master toggle";

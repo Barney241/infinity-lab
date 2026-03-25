@@ -27,9 +27,11 @@
       userDirs = {
         enable = true;
         createDirectories = true;
+        setSessionVariables = true;
         templates = null;
         publicShare = null;
       };
+      mimeApps.enable = true;
   };
 
 

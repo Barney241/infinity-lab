@@ -6,12 +6,15 @@
     ../programs/zsh.nix
     ../programs/tmux.nix
     ../programs/git.nix
-    ../programs/firefox.nix
+    ../programs/browser.nix
     ../programs/ghostty.nix
     ../programs/alacritty.nix
     ../programs/desktop.nix
     ../programs/i3.nix
   ];
+
+  browser.default = "zen";
+  browser.extra = [ "chromium" ];
 
   home.file = {
     # Stable SDK symlinks

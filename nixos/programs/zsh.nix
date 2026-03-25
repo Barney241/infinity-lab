@@ -61,7 +61,7 @@
         "tmux"
         "docker"
         "kubectl"
-        # "ssh-agent"
+        "ssh-agent"
       ];
     };
     plugins = with pkgs; [
